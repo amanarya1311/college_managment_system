@@ -5,7 +5,7 @@ const Faculty =
   require("../models/Faculty");
 
 const Attendance =
-  require("../models/attendance");
+  require("../models/Attendance");
 
 const getDashboardStats =
   async (req, res) => {
