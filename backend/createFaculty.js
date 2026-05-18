@@ -7,7 +7,7 @@ const bcrypt =
   require("bcryptjs");
 
 const Faculty =
-  require("./models/Faculty");
+  require("./module/Faculty");
 
 mongoose.connect(
   process.env.MONGO_URI
