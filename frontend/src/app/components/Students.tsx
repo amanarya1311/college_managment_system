@@ -48,9 +48,9 @@ export function Students() {
 
   try {
 
-    const response = await api.get(
-      "http://localhost:5000/api/students"
-    );
+const response = await api.get(
+  "/api/students"
+);
 
     setStudents(response.data);
 
@@ -127,9 +127,9 @@ const filteredStudents = students.filter((student) => {
 
     try {
 
-      await api.delete(
-        `http://localhost:5000/api/students/${id}`
-      );
+await api.delete(
+  `/api/students/${id}`
+);
 
       loadStudents();
 
@@ -442,23 +442,23 @@ console.log(studentData);
 
     if (student) {
 
-      await api.put(
+await api.put(
 
-        `http://localhost:5000/api/students/${student._id}`,
+  `/api/students/${student._id}`,
 
-        studentData
+  studentData
 
-      );
+);
 
     } else {
 
-      await api.post(
+await api.post(
 
-        "http://localhost:5000/api/students",
+  "/api/students",
 
-        studentData
+  studentData
 
-      );
+);
 
     }
 

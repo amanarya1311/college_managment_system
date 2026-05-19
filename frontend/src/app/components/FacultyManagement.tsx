@@ -54,23 +54,23 @@ export function FacultyManagement() {
           "token"
         );
 
-      const response =
-        await api.get(
+const response =
+  await api.get(
 
-          "http://localhost:5000/api/faculty-management",
+    "/api/faculty-management",
 
-          {
+    {
 
-            headers: {
+      headers: {
 
-              Authorization:
-                `Bearer ${token}`
+        Authorization:
+          `Bearer ${token}`
 
-            }
+      }
 
-          }
+    }
 
-        );
+  );
 
       setFaculty(
         response.data
@@ -117,22 +117,22 @@ const handleDelete =
             "token"
           );
 
-        await api.delete(
+await api.delete(
 
-          `http://localhost:5000/api/faculty-management/${id}`,
+  `/api/faculty-management/${id}`,
 
-          {
+  {
 
-            headers: {
+    headers: {
 
-              Authorization:
-                `Bearer ${token}`
+      Authorization:
+        `Bearer ${token}`
 
-            }
+    }
 
-          }
+  }
 
-        );
+);
 
         toast.success(
 
@@ -353,24 +353,24 @@ function FacultyForm({
 
       if (faculty) {
 
-        await api.put(
+await api.put(
 
-          `http://localhost:5000/api/faculty-management/${faculty._id || faculty.id}`,
+  `/api/faculty-management/${faculty._id || faculty.id}`,
 
-          formData,
+  formData,
 
-          {
+  {
 
-            headers: {
+    headers: {
 
-              Authorization:
-                `Bearer ${token}`
+      Authorization:
+        `Bearer ${token}`
 
-            }
+    }
 
-          }
+  }
 
-        );
+);
 
         toast.success(
 
@@ -380,24 +380,24 @@ function FacultyForm({
 
       } else {
 
-        await api.post(
+await api.post(
 
-          "http://localhost:5000/api/faculty-management",
+  "/api/faculty-management",
 
-          formData,
+  formData,
 
-          {
+  {
 
-            headers: {
+    headers: {
 
-              Authorization:
-                `Bearer ${token}`
+      Authorization:
+        `Bearer ${token}`
 
-            }
+    }
 
-          }
+  }
 
-        );
+);
 
         toast.success(
 

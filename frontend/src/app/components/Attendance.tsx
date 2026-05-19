@@ -80,7 +80,7 @@ const token =
 const response =
   await api.get(
 
-    "http://localhost:5000/api/students",
+    "/api/students",
 
     {
 
@@ -305,7 +305,7 @@ const data = {
 };
 await api.post(
 
-  "http://localhost:5000/api/attendance",
+  "/api/attendance",
 
   data,
 

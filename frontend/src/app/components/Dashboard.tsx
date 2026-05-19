@@ -44,23 +44,23 @@ const loadDashboardData =
           "token"
         );
 
-      const response =
-        await api.get(
+const response =
+  await api.get(
 
-          "http://localhost:5000/api/dashboard/stats",
+    "/api/dashboard/stats",
 
-          {
+    {
 
-            headers: {
+      headers: {
 
-              Authorization:
-                `Bearer ${token}`
+        Authorization:
+          `Bearer ${token}`
 
-            }
+      }
 
-          }
+    }
 
-        );
+  );
 
       const data =
         response.data;

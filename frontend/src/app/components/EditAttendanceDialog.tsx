@@ -132,30 +132,30 @@ export function EditAttendanceDialog({
 
       try {
 
-        await api.put(
+await api.put(
 
-          `http://localhost:5000/api/attendance/${record._id}`,
+  `/api/attendance/${record._id}`,
 
-          {
+  {
 
-            date:
-              formData.date,
+    date:
+      formData.date,
 
-            status:
-              formData.status,
+    status:
+      formData.status,
 
-            subject:
-              formData.subject,
+    subject:
+      formData.subject,
 
-            session:
-              formData.session,
+    session:
+      formData.session,
 
-            remarks:
-              formData.remarks,
+    remarks:
+      formData.remarks,
 
-          }
+  }
 
-        );
+);
 
         toast.success(
           "Attendance updated successfully"
@@ -195,11 +195,11 @@ export function EditAttendanceDialog({
 
       try {
 
-        await api.delete(
+await api.delete(
 
-          `http://localhost:5000/api/attendance/${record._id}`
+  `/api/attendance/${record._id}`
 
-        );
+);
 
         toast.success(
           "Attendance deleted successfully"

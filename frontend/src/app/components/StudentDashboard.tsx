@@ -28,10 +28,10 @@ export function StudentDashboard() {
   const { user } =
     useAuth();
 
-  const [student, setStudent] =
-    useState<Student | null>(
-      null
-    );
+const [student, setStudent] =
+  useState<any>(
+    null
+  );
 
   const [attendance, setAttendance] =
     useState<
@@ -67,12 +67,12 @@ const loadStudentData =
       if (!user?._id)
         return;
 
-      const response =
-        await api.get(
+const response =
+  await api.get(
 
-          `http://localhost:5000/api/student/attendance/${user._id}`
+    `/api/student/attendance/${user._id}`
 
-        );
+  );
 
       const attendanceRecords =
         response.data;

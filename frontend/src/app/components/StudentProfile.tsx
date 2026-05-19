@@ -67,12 +67,12 @@ if (!studentId) return;
 
 if (user?.role !== "student") {
 
-  const studentResponse =
-    await api.get(
+const studentResponse =
+  await api.get(
 
-      `http://localhost:5000/api/students/${studentId}`
+    `/api/students/${studentId}`
 
-    );
+  );
 
   setStudent(
     studentResponse.data

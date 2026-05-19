@@ -64,23 +64,23 @@ export function Reports() {
 
     };
 
-    const studentsResponse =
-      await api.get(
+const studentsResponse =
+  await api.get(
 
-        "http://localhost:5000/api/students",
+    "/api/students",
 
-        config
+    config
 
-      );
+  );
 
-    const attendanceResponse =
-      await api.get(
+const attendanceResponse =
+  await api.get(
 
-        "http://localhost:5000/api/attendance",
+    "/api/attendance",
 
-        config
+    config
 
-      );
+  );
 
     setStudents(
       studentsResponse.data
