@@ -8,6 +8,8 @@ const {
 
   changePassword,
 
+  updateProfile,
+
 } = require("../controllers/authController");
 
 const authMiddleware =
@@ -25,6 +27,16 @@ router.put(
   authMiddleware,
 
   changePassword
+
+);
+
+router.put(
+
+  "/update-profile",
+
+  authMiddleware,
+
+  updateProfile
 
 );
 

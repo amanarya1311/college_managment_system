@@ -239,9 +239,122 @@ const changePassword =
 
 };
 
+const updateProfile =
+  async (req, res) => {
+
+    try {
+
+      const {
+
+        name,
+
+        phone,
+
+        department,
+
+        semester,
+
+      } = req.body;
+
+      let user;
+
+      // ADMIN
+
+      if (
+        req.user.role ===
+        "admin"
+      ) {
+
+        user =
+          await Admin.findById(
+            req.user.id
+          );
+
+      }
+
+      // FACULTY
+
+      else if (
+        req.user.role ===
+        "faculty"
+      ) {
+
+        user =
+          await Faculty.findById(
+            req.user.id
+          );
+
+      }
+
+      // STUDENT
+
+      else if (
+        req.user.role ===
+        "student"
+      ) {
+
+        user =
+          await Student.findById(
+            req.user.id
+          );
+
+      }
+
+      if (!user) {
+
+        return res.status(404).json({
+
+          message:
+            "User not found",
+
+        });
+
+      }
+
+      // UPDATE FIELDS
+
+      if (name)
+        user.name = name;
+
+      if (phone)
+        user.phone = phone;
+
+      if (department)
+        user.department =
+          department;
+
+      if (semester)
+        user.semester =
+          semester;
+
+      await user.save();
+
+      res.json({
+
+        message:
+          "Profile updated successfully",
+
+        user,
+
+      });
+
+    } catch (error) {
+
+      res.status(500).json({
+
+        message:
+          error.message,
+
+      });
+
+    }
+
+};
+
 module.exports = {
 
   loginAdmin,
+  updateProfile,
 
   changePassword,
 

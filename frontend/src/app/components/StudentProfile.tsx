@@ -222,39 +222,9 @@ const attendanceResponse =
               {student.name}
             </h2>
             <p className="text-gray-500 mt-1">{student.rollNo}</p>
-            <div className="mt-4">
+<div className="mt-4">
 
   <Link to="/change-password">
-
-  <Button
-  className="w-full mt-3"
-  variant="outline"
-  onClick={() => {
-
-    setEditMode(true);
-
-    setFormData({
-
-      name:
-        student?.name || "",
-
-      phone:
-        student?.phone || "",
-
-      department:
-        student?.department || "",
-
-      semester:
-        student?.semester?.toString() || "",
-
-    });
-
-  }}
->
-
-  Edit Profile
-
-</Button>
 
     <Button className="w-full">
 
@@ -263,6 +233,36 @@ const attendanceResponse =
     </Button>
 
   </Link>
+
+  <Button
+    className="w-full mt-3"
+    variant="outline"
+    onClick={() => {
+
+      setEditMode(true);
+
+      setFormData({
+
+        name:
+          student?.name || "",
+
+        phone:
+          student?.phone || "",
+
+        department:
+          student?.department || "",
+
+        semester:
+          student?.semester?.toString() || "",
+
+      });
+
+    }}
+  >
+
+    Edit Profile
+
+  </Button>
 
 </div>
             
