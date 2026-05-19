@@ -242,6 +242,10 @@ const changePassword =
 const updateProfile =
   async (req, res) => {
 
+    console.log(req.body);
+
+    console.log(req.user);
+
     try {
 
       const {
@@ -323,9 +327,11 @@ const updateProfile =
         user.department =
           department;
 
-      if (semester)
-        user.semester =
-          semester;
+if (
+  semester !== undefined
+)
+  user.semester =
+    Number(semester);
 
       await user.save();
 

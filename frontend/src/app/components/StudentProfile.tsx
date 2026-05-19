@@ -290,13 +290,6 @@ const attendanceResponse =
               <div className="flex items-center gap-3 text-sm">
                 <Calendar className="w-4 h-4 text-gray-400" />
                 <span className="text-gray-700">
-                  Enrolled: {
-  student.enrollmentDate
-    ? new Date(
-        student.enrollmentDate
-      ).toLocaleDateString()
-    : "-"
-}
                 </span>
               </div>
             </div>
@@ -518,29 +511,15 @@ const attendanceResponse =
 
             try {
 
-              const token =
-                localStorage.getItem(
-                  "token"
-                );
+console.log(formData);
 
-              await api.put(
+await api.put(
 
-                "/api/auth/update-profile",
+  "/api/auth/update-profile",
 
-                formData,
+  formData
 
-                {
-
-                  headers: {
-
-                    Authorization:
-                      `Bearer ${token}`,
-
-                  },
-
-                }
-
-              );
+);
 
               window.location.reload();
 
