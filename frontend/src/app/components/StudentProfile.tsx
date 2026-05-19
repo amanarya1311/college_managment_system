@@ -513,15 +513,30 @@ const attendanceResponse =
 
 console.log(formData);
 
-await api.put(
+const response =
+  await api.put(
 
-  "/api/auth/update-profile",
+    "/api/auth/update-profile",
 
-  formData
+    formData
+
+  );
+
+setStudent(
+  response.data.user
+);
+
+localStorage.setItem(
+
+  "user",
+
+  JSON.stringify(
+    response.data.user
+  )
 
 );
 
-              window.location.reload();
+window.location.reload();
 
             } catch (error) {
 
