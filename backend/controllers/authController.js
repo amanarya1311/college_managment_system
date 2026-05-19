@@ -1,5 +1,11 @@
 const Admin = require("../models/Admin");
 
+const Faculty =
+  require("../models/Faculty");
+
+const Student =
+  require("../models/Student");
+
 const bcrypt =
   require("bcryptjs");
 
@@ -114,8 +120,6 @@ const loginAdmin =
 const changePassword =
   async (req, res) => {
 
-    console.log("Change password API hit");
-
     try {
 
       const {
@@ -126,12 +130,51 @@ const changePassword =
 
       } = req.body;
 
-      const admin =
-        await Admin.findById(
-          req.user.id
-        );
+      let user;
 
-      if (!admin) {
+      // ADMIN
+
+      if (
+        req.user.role ===
+        "admin"
+      ) {
+
+        user =
+          await Admin.findById(
+            req.user.id
+          );
+
+      }
+
+      // FACULTY
+
+      else if (
+        req.user.role ===
+        "faculty"
+      ) {
+
+        user =
+          await Faculty.findById(
+            req.user.id
+          );
+
+      }
+
+      // STUDENT
+
+      else if (
+        req.user.role ===
+        "student"
+      ) {
+
+        user =
+          await Student.findById(
+            req.user.id
+          );
+
+      }
+
+      if (!user) {
 
         return res.status(404).json({
 
@@ -147,7 +190,7 @@ const changePassword =
 
           currentPassword,
 
-          admin.password
+          user.password
 
         );
 
@@ -171,10 +214,10 @@ const changePassword =
 
         );
 
-      admin.password =
+      user.password =
         hashedPassword;
 
-      await admin.save();
+      await user.save();
 
       res.json({
 
