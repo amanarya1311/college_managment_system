@@ -20,6 +20,8 @@ import { StudentProfile } from "./components/StudentProfile";
 import { Attendance } from "./components/Attendance";
 import { Reports } from "./components/Reports";
 
+import { ChangePassword } from "./components/ChangePassword";
+
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function getCurrentUser() {
@@ -296,6 +298,27 @@ export const router =
           ),
 
         },
+{
+
+  path: "change-password",
+
+  element: (
+
+    <ProtectedRoute
+      allowedRoles={[
+        "admin",
+        "faculty",
+        "student",
+      ]}
+    >
+
+      <ChangePassword />
+
+    </ProtectedRoute>
+
+  ),
+
+},
 
       ],
 

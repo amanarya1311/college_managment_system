@@ -206,6 +206,19 @@ const attendanceResponse =
               {student.name}
             </h2>
             <p className="text-gray-500 mt-1">{student.rollNo}</p>
+            <div className="mt-4">
+
+  <Link to="/change-password">
+
+    <Button className="w-full">
+
+      Change Password
+
+    </Button>
+
+  </Link>
+
+</div>
             
             <div className="mt-6 space-y-3">
               <div className="flex items-center gap-3 text-sm">

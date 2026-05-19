@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import {Home, ClipboardList, BarChart3, GraduationCap, LogOut, Menu,
-
+import {
+  Home,
+  ClipboardList,
+  BarChart3,
+  GraduationCap,
+  LogOut,
+  Menu,
   X,
-
-  Users
-
+  Users,
+  KeyRound
 } from "lucide-react";
 
 import { useAuth } from "../contexts/AuthContext";
@@ -42,6 +46,12 @@ export function FacultyLayout() {
     href: "/reports",
     icon: BarChart3
   },
+
+  {
+    name: "Change Password",
+    href: "/change-password",
+    icon: KeyRound
+  }
 
 ];
 

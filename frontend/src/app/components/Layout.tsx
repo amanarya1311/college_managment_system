@@ -1,7 +1,30 @@
 
 import { useState } from "react";
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, Users, ClipboardList, BarChart3, GraduationCap, LogOut, UserCog, Menu, X } from "lucide-react";
+import {
+
+  Home,
+
+  Users,
+
+  ClipboardList,
+
+  BarChart3,
+
+  GraduationCap,
+
+  LogOut,
+
+  UserCog,
+
+  Menu,
+
+  X,
+
+  KeyRound
+
+} from "lucide-react";
+
 import { useAuth } from "../contexts/AuthContext";
 import { Button } from "./ui/button";
 
@@ -128,6 +151,16 @@ export function Layout() {
     : [])
 
 ];
+
+navigation.push({
+
+  name: "Change Password",
+
+  href: "/change-password",
+
+  icon: KeyRound
+
+});
 
   const isActive = (href: string) => {
     if (href === "/") {
