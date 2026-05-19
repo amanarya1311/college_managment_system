@@ -17,6 +17,22 @@ export function StudentProfile() {
   const [editingRecord, setEditingRecord] = useState<AttendanceRecord | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
+  const [editMode, setEditMode] =
+  useState(false);
+
+const [formData, setFormData] =
+  useState({
+
+    name: "",
+
+    phone: "",
+
+    department: "",
+
+    semester: "",
+
+});
+
 const loadAttendanceData = async () => {
 
   try {
@@ -210,6 +226,36 @@ const attendanceResponse =
 
   <Link to="/change-password">
 
+  <Button
+  className="w-full mt-3"
+  variant="outline"
+  onClick={() => {
+
+    setEditMode(true);
+
+    setFormData({
+
+      name:
+        student?.name || "",
+
+      phone:
+        student?.phone || "",
+
+      department:
+        student?.department || "",
+
+      semester:
+        student?.semester?.toString() || "",
+
+    });
+
+  }}
+>
+
+  Edit Profile
+
+</Button>
+
     <Button className="w-full">
 
       Change Password
@@ -399,6 +445,137 @@ const attendanceResponse =
         onOpenChange={setIsEditDialogOpen}
         onUpdate={handleUpdateComplete}
       />
+
+      {editMode && (
+
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+    <div className="bg-white p-6 rounded-xl w-full max-w-md space-y-4">
+
+      <h2 className="text-2xl font-bold">
+
+        Edit Profile
+
+      </h2>
+
+      <input
+        type="text"
+        placeholder="Name"
+        value={formData.name}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            name: e.target.value
+          })
+        }
+        className="w-full border p-3 rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Phone"
+        value={formData.phone}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            phone: e.target.value
+          })
+        }
+        className="w-full border p-3 rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Department"
+        value={formData.department}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            department: e.target.value
+          })
+        }
+        className="w-full border p-3 rounded-lg"
+      />
+
+      <input
+        type="number"
+        placeholder="Semester"
+        value={formData.semester}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            semester: e.target.value
+          })
+        }
+        className="w-full border p-3 rounded-lg"
+      />
+
+      <div className="flex gap-3">
+
+        <Button
+          className="w-full"
+          onClick={async () => {
+
+            try {
+
+              const token =
+                localStorage.getItem(
+                  "token"
+                );
+
+              await api.put(
+
+                "/api/auth/update-profile",
+
+                formData,
+
+                {
+
+                  headers: {
+
+                    Authorization:
+                      `Bearer ${token}`,
+
+                  },
+
+                }
+
+              );
+
+              window.location.reload();
+
+            } catch (error) {
+
+              console.log(error);
+
+            }
+
+          }}
+        >
+
+          Save
+
+        </Button>
+
+        <Button
+          variant="outline"
+          className="w-full"
+          onClick={() =>
+            setEditMode(false)
+          }
+        >
+
+          Cancel
+
+        </Button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+)}
     </div>
   );
 }
