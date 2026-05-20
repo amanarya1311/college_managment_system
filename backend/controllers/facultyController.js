@@ -82,30 +82,33 @@ const loginFaculty =
 
         token,
 
-        user: {
+user: {
 
-          _id:
-            faculty._id,
+  _id:
+    faculty._id,
 
-          name:
-            faculty.name,
+  name:
+    faculty.name,
 
-          email:
-            faculty.email,
+  email:
+    faculty.email,
 
-          role:
-            "faculty",
+  role:
+    "faculty",
 
-          department:
-            faculty.department,
+  department:
+    faculty.department,
 
-          designation:
-            faculty.designation,
+  designation:
+    faculty.designation,
 
-          phone:
-            faculty.phone
+  phone:
+    faculty.phone,
 
-        },
+  profileImage:
+    faculty.profileImage
+
+},
 
       });
 
@@ -215,11 +218,78 @@ const faculty =
 
   };
 
+  // UPDATE FACULTY
+
+const updateFaculty =
+  async (req, res) => {
+
+    try {
+
+      const {
+
+        name,
+        phone,
+        department,
+        designation,
+        profileImage
+
+      } = req.body;
+
+      const updatedFaculty =
+        await Faculty.findByIdAndUpdate(
+
+          req.params.id,
+
+          {
+
+            name,
+            phone,
+            department,
+            designation,
+            profileImage
+
+          },
+
+          {
+            new: true
+          }
+
+        );
+
+      if (!updatedFaculty) {
+
+        return res.status(404).json({
+
+          message:
+            "Faculty not found"
+
+        });
+
+      }
+
+      res.json(
+        updatedFaculty
+      );
+
+    } catch (error) {
+
+      res.status(500).json({
+
+        message:
+          error.message
+
+      });
+
+    }
+
+  };
 
 module.exports = {
 
   loginFaculty,
 
-  addFaculty
+  addFaculty,
+
+  updateFaculty
 
 };

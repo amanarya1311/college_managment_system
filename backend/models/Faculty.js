@@ -14,7 +14,15 @@ const facultySchema =
 
     designation: String,
 
-    phone: String
+    phone: {
+      type: String,
+      default: ""
+    },
+
+    profileImage: {
+      type: String,
+      default: ""
+    }
 
   });
 

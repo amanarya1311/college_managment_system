@@ -1,3 +1,5 @@
+import { FacultyProfile } from "./components/FacultyProfile";
+
 import { FacultyDashboard }
 from "./components/FacultyDashboard";
 import {
@@ -277,27 +279,44 @@ export const router =
 
         },
 
-        {
+{
+  path: "profile",
 
-          path: "profile",
+  element: (
 
-          element: (
+    <ProtectedRoute
+      allowedRoles={[
+        "student",
+      ]}
+    >
 
-            <ProtectedRoute
-              allowedRoles={[
-                "admin",
-                "faculty",
-                "student",
-              ]}
-            >
+      <StudentProfile />
 
-              <StudentProfile />
+    </ProtectedRoute>
 
-            </ProtectedRoute>
+  ),
 
-          ),
+},
 
-        },
+{
+  path: "faculty/profile",
+
+  element: (
+
+    <ProtectedRoute
+      allowedRoles={[
+        "faculty",
+      ]}
+    >
+
+      <FacultyProfile />
+
+    </ProtectedRoute>
+
+  ),
+
+},
+
 {
 
   path: "change-password",

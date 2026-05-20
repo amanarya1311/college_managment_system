@@ -14,7 +14,9 @@ const {
 
   loginFaculty,
 
-  addFaculty
+  addFaculty,
+
+  updateFaculty
 
 } = require(
   "../controllers/facultyController"
@@ -45,6 +47,19 @@ router.post(
   ),
 
   addFaculty
+
+);
+
+
+// UPDATE FACULTY
+
+router.put(
+
+  "/:id",
+
+  authMiddleware,
+
+  updateFaculty
 
 );
 

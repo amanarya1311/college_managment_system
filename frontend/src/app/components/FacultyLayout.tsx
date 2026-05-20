@@ -47,11 +47,17 @@ export function FacultyLayout() {
     icon: BarChart3
   },
 
-  {
-    name: "Change Password",
-    href: "/change-password",
-    icon: KeyRound
-  }
+{
+  name: "Change Password",
+  href: "/change-password",
+  icon: KeyRound
+},
+
+{
+  name: "My Profile",
+  href: "/faculty/profile",
+  icon: Users
+},
 
 ];
 
