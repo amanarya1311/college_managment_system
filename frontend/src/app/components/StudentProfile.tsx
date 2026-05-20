@@ -581,17 +581,14 @@ if (selectedImage) {
     new FormData();
 
   imageData.append(
-
     "profileImage",
-
     selectedImage
-
   );
 
   const uploadResponse =
     await api.post(
 
-      "/api/auth/upload-profile",
+      "/upload-profile",
 
       imageData,
 
@@ -616,7 +613,7 @@ if (selectedImage) {
 const response =
   await api.put(
 
-    "/api/auth/update-profile",
+    "/profile",
 
     {
 
