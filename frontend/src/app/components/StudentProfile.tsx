@@ -41,18 +41,17 @@ if (
   user?.role === "student"
 ) {
 
-const studentId =
-  user._id;
+  const updatedUser =
+    JSON.parse(
 
-  const studentResponse =
-    await api.get(
-
-      `/api/students/${studentId}`
+      localStorage.getItem(
+        "user"
+      ) || "{}"
 
     );
 
   setStudent(
-    studentResponse.data
+    updatedUser as Student
   );
 
 }
@@ -534,17 +533,30 @@ setStudent(
   response.data.user
 );
 
+const existingUser =
+  JSON.parse(
+
+    localStorage.getItem(
+      "user"
+    ) || "{}"
+
+  );
+
 localStorage.setItem(
 
   "user",
 
-  JSON.stringify(
-    response.data.user
-  )
+  JSON.stringify({
+
+    ...existingUser,
+
+    ...response.data.user
+
+  })
 
 );
 
-window.location.reload();
+setEditMode(false);
 
             } catch (error) {
 
