@@ -486,15 +486,15 @@ const response =
 
                         ...existingUser,
 
-                        ...response.data.user
+                        ...response.data
 
                       })
 
                     );
 
-                    setFaculty(
-                      response.data.user
-                    );
+setFaculty(
+  response.data
+);
 
                     setEditMode(false);
 
