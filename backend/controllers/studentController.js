@@ -315,33 +315,36 @@ const loginStudent =
 
         token,
 
-        user: {
+user: {
 
-          _id:
-            student._id,
+  _id:
+    student._id,
 
-          name:
-            student.name,
+  name:
+    student.name,
 
-          rollNo:
-            student.rollNo,
+  rollNo:
+    student.rollNo,
 
-          email:
-            student.email,
+  email:
+    student.email,
 
-          role:
-            "student",
+  role:
+    "student",
 
-          studentId:
-            student._id,
+  studentId:
+    student._id,
 
-          department:
-            student.department,
+  department:
+    student.department,
 
-          semester:
-            student.semester
+  semester:
+    student.semester,
 
-        }
+  phone:
+    student.phone
+
+}
 
       });
 

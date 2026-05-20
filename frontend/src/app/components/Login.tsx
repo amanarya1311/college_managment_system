@@ -155,9 +155,15 @@ setRole(role);
 
         <div className="flex flex-col items-center mb-8">
 
-          <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-4">
-            <GraduationCap className="w-10 h-10 text-white" />
-          </div>
+<div className="w-24 h-24 mb-3 flex items-center justify-center">
+
+  <img
+    src="/logo.png"
+    alt="CSIT Logo"
+    className="max-w-full max-h-full object-contain"
+  />
+
+</div>
 
           <h1 className="text-3xl font-bold text-gray-900">
             CSIT Department
