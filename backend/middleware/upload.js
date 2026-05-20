@@ -4,6 +4,23 @@ const multer =
 const path =
   require("path");
 
+const fs =
+  require("fs");
+
+// CREATE uploads FOLDER
+
+if (
+  !fs.existsSync(
+    "uploads"
+  )
+) {
+
+  fs.mkdirSync(
+    "uploads"
+  );
+
+}
+
 const storage =
   multer.diskStorage({
 
