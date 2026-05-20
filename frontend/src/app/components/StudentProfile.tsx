@@ -229,19 +229,15 @@ const attendanceResponse =
 
   <img
 
-    src={
+src={
 
-student?.profileImage
+  student?.profileImage
 
-  ? `${
-      (import.meta as any)
-        .env
-        .VITE_API_URL
-    }${student.profileImage}`
+    ? `https://college-managment-system-15bx.onrender.com${student.profileImage}`
 
-  : "/logo.png"
+    : "/logo.png"
 
-    }
+}
 
     alt="Profile"
 
