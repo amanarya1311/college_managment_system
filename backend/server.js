@@ -1,5 +1,8 @@
 require("dotenv").config();
 
+const noticeRoutes =
+  require("./routes/noticeRoutes");
+
 const studentManagementRoutes =
 require("./routes/studentManagementRoutes");
 
@@ -45,6 +48,14 @@ app.use(
   express.static(
     "uploads"
   )
+);
+
+app.use(
+
+  "/api/notices",
+
+  noticeRoutes
+
 );
 
 // AUTH

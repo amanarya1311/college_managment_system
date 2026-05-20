@@ -21,7 +21,8 @@ import {
 
   X,
 
-  KeyRound
+  KeyRound,
+Bell
 
 } from "lucide-react";
 
@@ -90,6 +91,16 @@ export function Layout() {
 
         },
 
+        {
+
+  name: "Notices",
+
+  href: "/notices",
+
+  icon: Bell
+
+},
+
       ]
 
     : []),
@@ -145,6 +156,16 @@ export function Layout() {
           icon: Home
 
         },
+
+        {
+
+  name: "Notices",
+
+  href: "/notices",
+
+  icon: Bell
+
+},
 
       ]
 

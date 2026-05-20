@@ -22,6 +22,9 @@ import { StudentProfile } from "./components/StudentProfile";
 import { Attendance } from "./components/Attendance";
 import { Reports } from "./components/Reports";
 
+import { Notices }
+from "./components/Notices";
+
 import { ChangePassword } from "./components/ChangePassword";
 
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -278,6 +281,28 @@ export const router =
           ),
 
         },
+
+        {
+
+  path: "notices",
+
+  element: (
+
+    <ProtectedRoute
+      allowedRoles={[
+        "admin",
+        "faculty",
+        "student",
+      ]}
+    >
+
+      <Notices />
+
+    </ProtectedRoute>
+
+  ),
+
+},
 
 {
   path: "profile",
