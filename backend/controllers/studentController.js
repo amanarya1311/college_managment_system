@@ -342,7 +342,10 @@ user: {
     student.semester,
 
   phone:
-    student.phone
+    student.phone,
+
+  profileImage:
+    student.profileImage
 
 }
 
