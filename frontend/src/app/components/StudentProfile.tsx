@@ -37,13 +37,28 @@ const loadAttendanceData = async () => {
 
   try {
 
-    if (
-      user?.role === "student"
-    ) {
-      
-      setStudent(user as Student);
+if (
+  user?.role === "student"
+) {
 
-    }
+  const studentId =
+
+    user.studentId ||
+    user._id ||
+    user.id;
+
+  const studentResponse =
+    await api.get(
+
+      `/api/students/${studentId}`
+
+    );
+
+  setStudent(
+    studentResponse.data
+  );
+
+}
 
     const studentId =
 
