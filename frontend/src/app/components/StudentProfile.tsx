@@ -565,99 +565,107 @@ student?.profileImage
 
         <Button
           className="w-full"
-          onClick={async () => {
+onClick={async () => {
 
-            try {
+  try {
 
-console.log(formData);
+    console.log(formData);
 
-let imageUrl =
-  student?.profileImage ||
-  "";
+    let imageUrl =
+      student?.profileImage ||
+      "";
 
-if (selectedImage) {
+    // UPLOAD IMAGE
 
-  const imageData =
-    new FormData();
+    if (selectedImage) {
 
-  imageData.append(
-    "profileImage",
-    selectedImage
-  );
+      const imageData =
+        new FormData();
 
-  const uploadResponse =
-    await api.post(
+      imageData.append(
+        "profileImage",
+        selectedImage
+      );
 
-      "/upload-profile",
+      const uploadResponse =
+        await api.post(
 
-      imageData,
+          "/api/auth/upload-profile",
 
-      {
+          imageData,
 
-        headers: {
+          {
 
-          "Content-Type":
-            "multipart/form-data",
+            headers: {
 
-        },
+              "Content-Type":
+                "multipart/form-data",
 
-      }
+            },
 
-    );
+          }
 
-  imageUrl =
-    uploadResponse.data.imageUrl;
+        );
 
-}
-
-const response =
-  await api.put(
-
-    "/profile",
-
-    {
-
-      ...formData,
-
-      profileImage:
-        imageUrl
+      imageUrl =
+        uploadResponse.data.imageUrl;
 
     }
 
-  );
+    // UPDATE PROFILE
 
-const existingUser =
-  JSON.parse(
+    const response =
+      await api.put(
 
-    localStorage.getItem(
-      "user"
-    ) || "{}"
+        "/api/auth/profile",
 
-  );
+        {
 
-localStorage.setItem(
+          ...formData,
 
-  "user",
+          profileImage:
+            imageUrl
 
-  JSON.stringify({
+        }
 
-    ...existingUser,
+      );
 
-    ...response.data.user
+    const existingUser =
+      JSON.parse(
 
-  })
+        localStorage.getItem(
+          "user"
+        ) || "{}"
 
-);
+      );
 
-setEditMode(false);
+    localStorage.setItem(
 
-            } catch (error) {
+      "user",
 
-              console.log(error);
+      JSON.stringify({
 
-            }
+        ...existingUser,
 
-          }}
+        ...response.data.user
+
+      })
+
+    );
+
+    setStudent(
+      response.data.user
+    );
+
+    setEditMode(false);
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}}
         >
 
           Save
