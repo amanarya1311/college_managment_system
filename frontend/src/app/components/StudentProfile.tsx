@@ -41,11 +41,8 @@ if (
   user?.role === "student"
 ) {
 
-  const studentId =
-
-    user.studentId ||
-    user._id ||
-    user.id;
+const studentId =
+  user._id;
 
   const studentResponse =
     await api.get(
@@ -60,17 +57,13 @@ if (
 
 }
 
-    const studentId =
+const studentId =
 
-      user?.role === "student"
+  user?.role === "student"
 
-        ? (
-            user.studentId ||
-            user._id ||
-            user.id
-          )
+    ? user._id
 
-        : id;
+    : id;
 
 console.log(
   "FULL USER:",
