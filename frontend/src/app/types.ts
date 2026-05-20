@@ -14,6 +14,8 @@ export interface Student {
 
   phone: string;
 
+  profileImage?: string;
+
   department: string;
 
   semester: number;

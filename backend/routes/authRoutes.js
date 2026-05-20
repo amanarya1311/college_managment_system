@@ -1,6 +1,11 @@
-const express = require("express");
+const express =
+  require("express");
 
-const router = express.Router();
+const router =
+  express.Router();
+
+const upload =
+  require("../middleware/upload");
 
 const {
 
@@ -32,11 +37,34 @@ router.put(
 
 router.put(
 
-  "/update-profile",
+  "/profile",
 
   authMiddleware,
 
   updateProfile
+
+);
+
+router.post(
+
+  "/upload-profile",
+
+  authMiddleware,
+
+  upload.single(
+    "profileImage"
+  ),
+
+  (req, res) => {
+
+    res.json({
+
+      imageUrl:
+        `/uploads/${req.file.filename}`
+
+    });
+
+  }
 
 );
 

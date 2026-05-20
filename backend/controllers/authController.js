@@ -248,17 +248,19 @@ const updateProfile =
 
     try {
 
-      const {
+const {
 
-        name,
+  name,
 
-        phone,
+  phone,
 
-        department,
+  department,
 
-        semester,
+  semester,
 
-      } = req.body;
+  profileImage,
+
+} = req.body;
 
       let user;
 
@@ -332,6 +334,10 @@ if (
 )
   user.semester =
     Number(semester);
+
+    if (profileImage)
+  user.profileImage =
+    profileImage;
 
       await user.save();
 

@@ -17,6 +17,12 @@ export function StudentProfile() {
   const [editingRecord, setEditingRecord] = useState<AttendanceRecord | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
+const [selectedImage,
+setSelectedImage] =
+  useState<File | null>(
+    null
+  );
+
   const [editMode, setEditMode] =
   useState(false);
 
@@ -219,11 +225,32 @@ const attendanceResponse =
         {/* Student Info Card */}
         <Card className="p-4 sm:p-6 lg:col-span-1">
           <div className="text-center">
-            <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-3xl font-bold text-blue-700">
-                {student.name?.[0] || "S"}
-              </span>
-            </div>
+ <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-blue-100 mx-auto mb-4">
+
+  <img
+
+    src={
+
+student?.profileImage
+
+  ? `${
+      (import.meta as any)
+        .env
+        .VITE_API_URL
+    }${student.profileImage}`
+
+  : "/logo.png"
+
+    }
+
+    alt="Profile"
+
+    className="w-full h-full object-cover"
+
+  />
+
+</div> 
+  
             
             <h2 className="text-2xl font-bold text-gray-900">
               {student.name}
@@ -497,18 +524,42 @@ const attendanceResponse =
         className="w-full border p-3 rounded-lg"
       />
 
-      <input
-        type="number"
-        placeholder="Semester"
-        value={formData.semester}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            semester: e.target.value
-          })
-        }
-        className="w-full border p-3 rounded-lg"
-      />
+<input
+  type="number"
+  placeholder="Semester"
+  value={formData.semester}
+  onChange={(e) =>
+    setFormData({
+      ...formData,
+      semester: e.target.value
+    })
+  }
+  className="w-full border p-3 rounded-lg"
+/>
+
+<input
+
+  type="file"
+
+  accept="image/*"
+
+  onChange={(e) => {
+
+    if (
+      e.target.files?.[0]
+    ) {
+
+      setSelectedImage(
+        e.target.files[0]
+      );
+
+    }
+
+  }}
+
+  className="w-full border p-3 rounded-lg"
+
+/>
 
       <div className="flex gap-3">
 
@@ -520,18 +571,63 @@ const attendanceResponse =
 
 console.log(formData);
 
+let imageUrl =
+  student?.profileImage ||
+  "";
+
+if (selectedImage) {
+
+  const imageData =
+    new FormData();
+
+  imageData.append(
+
+    "profileImage",
+
+    selectedImage
+
+  );
+
+  const uploadResponse =
+    await api.post(
+
+      "/api/auth/upload-profile",
+
+      imageData,
+
+      {
+
+        headers: {
+
+          "Content-Type":
+            "multipart/form-data",
+
+        },
+
+      }
+
+    );
+
+  imageUrl =
+    uploadResponse.data.imageUrl;
+
+}
+
 const response =
   await api.put(
 
     "/api/auth/update-profile",
 
-    formData
+    {
+
+      ...formData,
+
+      profileImage:
+        imageUrl
+
+    }
 
   );
-
-setStudent(
-  response.data.user
-);
 
 const existingUser =
   JSON.parse(

@@ -30,6 +30,11 @@ const studentSchema =
       default: ""
     },
 
+    profileImage: {
+  type: String,
+  default: ""
+},
+
     department: {
       type: String,
       required: true
