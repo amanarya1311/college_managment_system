@@ -573,6 +573,7 @@ onClick={async () => {
     if (selectedImage) {
 
       const imageData =
+      
         new FormData();
 
       imageData.append(
@@ -616,16 +617,19 @@ const response =
 
     "/api/student/profile",
 
-        {
+    {
 
-          ...formData,
+      ...formData,
 
-          profileImage:
-            imageUrl
+      profileImage:
+        imageUrl,
 
-        }
+      studentId:
+        student?._id
 
-      );
+    }
+
+  );
 
     const existingUser =
       JSON.parse(
@@ -661,11 +665,13 @@ setStudent({
 
     setEditMode(false);
 
-  } catch (error) {
+ } catch (error) {
 
-    console.log(error);
+  console.log(error);
 
-  }
+  setEditMode(false);
+
+}
 
 }}
         >
