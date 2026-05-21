@@ -58,7 +58,8 @@ router.delete(
   authMiddleware,
 
   roleMiddleware(
-    "admin"
+    "admin",
+    "faculty"
   ),
 
   deleteNotice

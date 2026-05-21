@@ -199,8 +199,11 @@ export function Notices() {
 
                 </div>
 
-                {user?.role ===
-                  "admin" && (
+{(user?.role ===
+  "admin" ||
+
+  user?.role ===
+  "faculty") && (
 
                   <Button
                     variant="destructive"
