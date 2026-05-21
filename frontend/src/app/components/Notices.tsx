@@ -8,6 +8,8 @@ import api from "../lib/axios";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 
+import { Trash2 } from "lucide-react";
+
 import { useAuth }
 from "../contexts/AuthContext";
 
@@ -74,6 +76,25 @@ export function Notices() {
 
         setTitle("");
         setMessage("");
+
+        loadNotices();
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
+    };
+
+  const handleDeleteNotice =
+    async (id: string) => {
+
+      try {
+
+        await api.delete(
+          `/api/notices/${id}`
+        );
 
         loadNotices();
 
@@ -155,22 +176,57 @@ export function Notices() {
 
             <Card
               key={notice._id}
-              className="p-5"
+              className="p-5 space-y-3"
             >
 
-              <h2 className="text-xl font-bold">
+              <div className="flex items-start justify-between">
 
-                {notice.title}
+                <div>
 
-              </h2>
+                  <h2 className="text-xl font-bold">
 
-              <p className="text-gray-600 mt-2">
+                    {notice.title}
+
+                  </h2>
+
+                  <p className="text-xs text-gray-400 mt-1">
+
+                    {new Date(
+                      notice.createdAt
+                    ).toLocaleString()}
+
+                  </p>
+
+                </div>
+
+                {user?.role ===
+                  "admin" && (
+
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={() =>
+                      handleDeleteNotice(
+                        notice._id
+                      )
+                    }
+                  >
+
+                    <Trash2 className="w-4 h-4" />
+
+                  </Button>
+
+                )}
+
+              </div>
+
+              <p className="text-gray-600">
 
                 {notice.message}
 
               </p>
 
-              <p className="text-sm text-gray-400 mt-4">
+              <p className="text-sm text-gray-400">
 
                 Posted by:
                 {" "}

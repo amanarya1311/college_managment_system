@@ -305,6 +305,46 @@ export const router =
 },
 
 {
+
+  path: "faculty/notices",
+
+  element: (
+
+    <ProtectedRoute
+      allowedRoles={[
+        "faculty",
+      ]}
+    >
+
+      <Notices />
+
+    </ProtectedRoute>
+
+  ),
+
+},
+
+{
+
+  path: "student/notices",
+
+  element: (
+
+    <ProtectedRoute
+      allowedRoles={[
+        "student",
+      ]}
+    >
+
+      <Notices />
+
+    </ProtectedRoute>
+
+  ),
+
+},
+
+{
   path: "profile",
 
   element: (

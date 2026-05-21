@@ -75,10 +75,60 @@ const addNotice =
 
 };
 
+
+// DELETE NOTICE
+
+const deleteNotice =
+  async (req, res) => {
+
+    try {
+
+      const deletedNotice =
+
+        await Notice.findByIdAndDelete(
+
+          req.params.id
+
+        );
+
+      if (!deletedNotice) {
+
+        return res.status(404).json({
+
+          message:
+            "Notice not found"
+
+        });
+
+      }
+
+      res.json({
+
+        message:
+          "Notice deleted successfully"
+
+      });
+
+    } catch (error) {
+
+      res.status(500).json({
+
+        message:
+          error.message
+
+      });
+
+    }
+
+};
+
+
 module.exports = {
 
   getNotices,
 
-  addNotice
+  addNotice,
+
+  deleteNotice
 
 };

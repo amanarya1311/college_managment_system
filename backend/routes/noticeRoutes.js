@@ -7,18 +7,23 @@ const router =
 const authMiddleware =
   require("../middleware/authMiddleware");
 
+const roleMiddleware =
+  require("../middleware/roleMiddleware");
+
 const {
 
   getNotices,
 
-  addNotice
+  addNotice,
+
+  deleteNotice
 
 } = require(
   "../controllers/noticeController"
 );
 
 
-// GET ALL
+// GET ALL NOTICES
 
 router.get(
 
@@ -42,6 +47,24 @@ router.post(
   addNotice
 
 );
+
+
+// DELETE NOTICE
+
+router.delete(
+
+  "/:id",
+
+  authMiddleware,
+
+  roleMiddleware(
+    "admin"
+  ),
+
+  deleteNotice
+
+);
+
 
 module.exports =
   router;

@@ -9,7 +9,8 @@ import {
   Menu,
   X,
   Users,
-  KeyRound
+  KeyRound,
+  Bell
 } from "lucide-react";
 
 import { useAuth } from "../contexts/AuthContext";
@@ -46,6 +47,12 @@ export function FacultyLayout() {
     href: "/reports",
     icon: BarChart3
   },
+
+  {
+  name: "Notices",
+  href: "/faculty/notices",
+  icon: Bell
+},
 
 {
   name: "Change Password",
