@@ -499,11 +499,13 @@ setFaculty(
 
                     setEditMode(false);
 
-                  } catch (error) {
+} catch (error) {
 
-                    console.log(error);
+  console.log(error);
 
-                  }
+  setEditMode(false);
+
+}
 
                 }}
 
