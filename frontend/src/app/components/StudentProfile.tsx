@@ -230,14 +230,11 @@ const attendanceResponse =
   <img
 
 src={
-
   student?.profileImage
-
-    ? `https://college-managment-system-15bx.onrender.com${student.profileImage}`
-
+    ? student.profileImage
     : "/logo.png"
-
 }
+
 
     alt="Profile"
 
@@ -587,11 +584,15 @@ onClick={async () => {
         await api.post(
 
           "/api/auth/upload-profile",
+          
 
           imageData,
 
+          
+
           {
 
+            
             headers: {
 
               "Content-Type":
@@ -609,11 +610,11 @@ onClick={async () => {
     }
 
     // UPDATE PROFILE
+    
+const response =
+  await api.put(
 
-    const response =
-      await api.put(
-
-        "/api/auth/profile",
+    "/api/student/profile",
 
         {
 
@@ -649,9 +650,14 @@ onClick={async () => {
 
     );
 
-    setStudent(
-      response.data.user
-    );
+setStudent({
+
+  ...response.data.user,
+
+  profileImage:
+    imageUrl
+
+});
 
     setEditMode(false);
 

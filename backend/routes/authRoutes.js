@@ -57,11 +57,13 @@ router.post(
 
   (req, res) => {
 
+    console.log(req.file);
+
     res.json({
 
-      imageUrl:
-        `/uploads/${req.file.filename}`
-
+imageUrl:
+  req.file.path
+  
     });
 
   }

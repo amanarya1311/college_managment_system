@@ -1,61 +1,42 @@
 const multer =
   require("multer");
 
-const path =
-  require("path");
+const {
+  CloudinaryStorage
+} = require(
+  "multer-storage-cloudinary"
+);
 
-const fs =
-  require("fs");
-
-// CREATE uploads FOLDER
-
-if (
-  !fs.existsSync(
-    "uploads"
-  )
-) {
-
-  fs.mkdirSync(
-    "uploads"
-  );
-
-}
+const cloudinary =
+  require("../config/cloudinary");
 
 const storage =
-  multer.diskStorage({
+  new CloudinaryStorage({
 
-    destination:
-      (req, file, cb) => {
+    cloudinary,
 
-        cb(
-          null,
-          "uploads/"
-        );
+    params: async (
+      req,
+      file
+    ) => ({
 
-      },
+      folder:
+        "college-management",
 
-    filename:
-      (req, file, cb) => {
+      allowed_formats: [
+        "jpg",
+        "jpeg",
+        "png"
+      ],
 
-        cb(
-
-          null,
-
-          Date.now() +
-          path.extname(
-            file.originalname
-          )
-
-        );
-
-      },
+    }),
 
   });
 
 const upload =
   multer({
 
-    storage,
+    storage
 
   });
 

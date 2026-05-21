@@ -141,21 +141,15 @@ export function FacultyProfile() {
 
               <img
 
-                src={
+src={
 
-                  faculty?.profileImage
+  faculty?.profileImage
 
-                    ? `${
+    ? faculty.profileImage
 
-                      (import.meta as any)
-                        .env
-                        .VITE_API_URL
+    : "/logo.png"
 
-                    }${faculty.profileImage}`
-
-                    : "/logo.png"
-
-                }
+}
 
                 alt="Profile"
 
@@ -478,22 +472,29 @@ const response =
 
                       );
 
-                    localStorage.setItem(
+const updatedUser = {
 
-                      "user",
+  ...existingUser,
 
-                      JSON.stringify({
+  ...response.data,
 
-                        ...existingUser,
+  profileImage:
+    imageUrl
 
-                        ...response.data
+};
 
-                      })
+localStorage.setItem(
 
-                    );
+  "user",
+
+  JSON.stringify(
+    updatedUser
+  )
+
+);
 
 setFaculty(
-  response.data
+  updatedUser
 );
 
                     setEditMode(false);

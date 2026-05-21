@@ -230,6 +230,46 @@ const deleteStudent =
 
   };
 
+// UPDATE STUDENT PROFILE
+
+const updateStudentProfile =
+  async (req, res) => {
+
+    try {
+
+      const student =
+        await Student.findByIdAndUpdate(
+
+          req.user.id,
+
+          req.body,
+
+          {
+
+            new: true
+
+          }
+
+        );
+
+      res.json({
+
+        user: student
+
+      });
+
+    } catch (error) {
+
+      res.status(500).json({
+
+        message:
+          error.message
+
+      });
+
+    }
+
+};
 
 // LOGIN STUDENT
 
@@ -375,6 +415,8 @@ module.exports = {
 
   deleteStudent,
 
-  loginStudent
+  loginStudent,
+
+  updateStudentProfile
 
 };

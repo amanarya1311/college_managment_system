@@ -26,7 +26,9 @@ const {
 
   updateStudent,
 
-  deleteStudent
+  deleteStudent,
+
+  updateStudentProfile
 
 } = require(
   "../controllers/studentController"
@@ -206,6 +208,49 @@ router.delete(
   ),
 
   deleteStudent
+
+);
+
+// UPDATE STUDENT PROFILE
+
+router.put(
+
+  "/profile",
+
+  async (req, res) => {
+
+    try {
+
+      const updatedStudent =
+
+        await Student.findByIdAndUpdate(
+
+          req.body.studentId,
+
+          req.body,
+
+          {
+
+            new: true
+
+          }
+
+        );
+
+      res.json(updatedStudent);
+
+    } catch (error) {
+
+      res.status(500).json({
+
+        message:
+          error.message
+
+      });
+
+    }
+
+  }
 
 );
 
