@@ -221,13 +221,35 @@ router.put(
 
     try {
 
+      console.log(
+        "PROFILE UPDATE BODY:",
+        req.body
+      );
+
       const updatedStudent =
 
         await Student.findByIdAndUpdate(
 
           req.body.studentId,
 
-          req.body,
+          {
+
+            name:
+              req.body.name,
+
+            phone:
+              req.body.phone,
+
+            department:
+              req.body.department,
+
+            semester:
+              req.body.semester,
+
+            profileImage:
+              req.body.profileImage
+
+          },
 
           {
 
@@ -237,9 +259,16 @@ router.put(
 
         );
 
-      res.json(updatedStudent);
+      res.json({
+
+        user:
+          updatedStudent
+
+      });
 
     } catch (error) {
+
+      console.log(error);
 
       res.status(500).json({
 
