@@ -326,7 +326,7 @@ const handleAddAssignment =
               <p className="text-gray-600">
 
                 {assignment.description}
- {assignment.fileUrl && (
+                {assignment.fileUrl && (
 
   <a
 

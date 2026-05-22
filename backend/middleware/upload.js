@@ -15,15 +15,21 @@ const storage =
 
     cloudinary,
 
-    params: {
+    params: async (
+      req,
+      file
+    ) => ({
 
       folder:
         "college-management",
 
       resource_type:
-        "raw",
+        "image",
 
-    },
+      format:
+        "pdf",
+
+    }),
 
   });
 
