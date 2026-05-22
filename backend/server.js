@@ -6,6 +6,9 @@ const noticeRoutes =
   const assignmentRoutes =
   require("./routes/assignmentRoutes");
 
+  const submissionRoutes =
+  require("./routes/submissionRoutes");
+
 const studentManagementRoutes =
 require("./routes/studentManagementRoutes");
 
@@ -77,6 +80,14 @@ app.use(
   "/api/assignments",
 
   assignmentRoutes
+
+);
+
+app.use(
+
+  "/api/submissions",
+
+  submissionRoutes
 
 );
 
