@@ -59,8 +59,9 @@ app.use(express.json());
 app.use(
   "/uploads",
 express.static(
-  "backend/uploads"
+  "uploads"
 )
+
 );
 
 app.use(

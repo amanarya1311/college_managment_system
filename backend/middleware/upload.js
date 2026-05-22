@@ -16,7 +16,7 @@ const storage =
 
 cb(
   null,
-  "backend/uploads/"
+  "uploads/"
 );
 
       },
