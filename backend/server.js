@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const path =require("path");
+
 const noticeRoutes =
   require("./routes/noticeRoutes");
 
@@ -62,7 +64,10 @@ app.use(express.json());
 app.use(
   "/uploads",
 express.static(
-  "uploads"
+  path.join(
+    __dirname,
+    "uploads"
+  )
 )
 
 );
