@@ -330,7 +330,7 @@ const handleAddAssignment =
 
   <a
 
-    href={assignment.fileUrl}
+    href={`https://college-managment-system-l5bx.onrender.com${assignment.fileUrl}`}
 
     download={
       assignment.originalFileName

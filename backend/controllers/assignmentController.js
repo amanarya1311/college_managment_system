@@ -68,10 +68,13 @@ const assignment =
     deadline,
 
     fileUrl:
-      req.file?.path || "",
+      req.file
+        ? `/uploads/${req.file.filename}`
+        : "",
 
     originalFileName:
-      req.file?.originalname || "assignment.pdf",
+      req.file?.originalname ||
+      "assignment.pdf",
 
     postedBy:
       req.user.role
