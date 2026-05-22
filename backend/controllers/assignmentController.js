@@ -67,7 +67,7 @@ const addAssignment =
 
           deadline,
 
-          fileUrl:req.file?.path || "",
+          fileUrl:req.file?.path? `${req.file.path}.pdf`: "",
 
           postedBy:
             req.user.role
