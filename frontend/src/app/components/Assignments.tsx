@@ -9,8 +9,7 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 
 import {
-  Trash2,
-  Upload
+  Trash2
 } from "lucide-react";
 
 import { useAuth }
@@ -40,12 +39,6 @@ export function Assignments() {
   const [deadline,
     setDeadline] =
     useState("");
-
-  const [file,
-    setFile] =
-    useState<File | null>(
-      null
-    );
 
   const loadAssignments =
     async () => {
@@ -80,43 +73,19 @@ export function Assignments() {
 
       try {
 
-        const formData =
-          new FormData();
-
-        formData.append(
-          "title",
-          title
-        );
-
-        formData.append(
-          "description",
-          description
-        );
-
-        formData.append(
-          "subject",
-          subject
-        );
-
-        formData.append(
-          "deadline",
-          deadline
-        );
-
         await api.post(
 
           "/api/assignments",
 
-          formData,
-
           {
 
-            headers: {
+            title,
 
-              "Content-Type":
-                "multipart/form-data"
+            description,
 
-            }
+            subject,
+
+            deadline
 
           }
 
@@ -126,7 +95,6 @@ export function Assignments() {
         setDescription("");
         setSubject("");
         setDeadline("");
-        setFile(null);
 
         loadAssignments();
 
@@ -218,24 +186,11 @@ export function Assignments() {
             className="w-full border p-3 rounded-lg"
           />
 
-          <input
-            type="file"
-            onChange={(e) =>
-              setFile(
-                e.target.files?.[0]
-                || null
-              )
-            }
-            className="w-full border p-3 rounded-lg"
-          />
-
           <Button
             onClick={
               handleAddAssignment
             }
           >
-
-            <Upload className="w-4 h-4 mr-2" />
 
             Upload Assignment
 
@@ -315,28 +270,6 @@ export function Assignments() {
                 {assignment.description}
 
               </p>
-
-              {assignment.fileUrl && (
-
-                <a
-
-                  href={
-                    assignment.fileUrl
-                  }
-
-                  target="_blank"
-
-                  rel="noreferrer"
-
-                  className="text-blue-600 underline"
-
-                >
-
-                  View Assignment File
-
-                </a>
-
-              )}
 
               <p className="text-sm text-gray-400">
 
