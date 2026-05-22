@@ -67,10 +67,7 @@ const addAssignment =
 
           deadline,
 
-          fileUrl:
-            req.file
-              ? req.file.path
-              : "",
+          fileUrl: "",
 
           postedBy:
             req.user.role

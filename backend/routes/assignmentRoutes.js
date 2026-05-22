@@ -52,10 +52,6 @@ router.post(
     "admin"
   ),
 
-  upload.single(
-    "file"
-  ),
-
   addAssignment
 
 );

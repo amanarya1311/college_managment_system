@@ -103,15 +103,6 @@ export function Assignments() {
           deadline
         );
 
-        if (file) {
-
-          formData.append(
-            "file",
-            file
-          );
-
-        }
-
         await api.post(
 
           "/api/assignments",
