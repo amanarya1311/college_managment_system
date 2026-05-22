@@ -40,6 +40,12 @@ export function Assignments() {
     setDeadline] =
     useState("");
 
+    const [file,
+  setFile] =
+  useState<File | null>(
+    null
+  );
+
   const loadAssignments =
     async () => {
 
@@ -68,43 +74,77 @@ export function Assignments() {
 
   }, []);
 
-  const handleAddAssignment =
-    async () => {
+const handleAddAssignment =
+  async () => {
 
-      try {
+    try {
 
-        await api.post(
+      const formData =
+        new FormData();
 
-          "/api/assignments",
+      formData.append(
+        "title",
+        title
+      );
 
-          {
+      formData.append(
+        "description",
+        description
+      );
 
-            title,
+      formData.append(
+        "subject",
+        subject
+      );
 
-            description,
+      formData.append(
+        "deadline",
+        deadline
+      );
 
-            subject,
+      if (file) {
 
-            deadline
-
-          }
-
+        formData.append(
+          "file",
+          file
         );
-
-        setTitle("");
-        setDescription("");
-        setSubject("");
-        setDeadline("");
-
-        loadAssignments();
-
-      } catch (error) {
-
-        console.log(error);
 
       }
 
-    };
+      await api.post(
+
+        "/api/assignments",
+
+        formData,
+
+        {
+
+          headers: {
+
+            "Content-Type":
+              "multipart/form-data",
+
+          },
+
+        }
+
+      );
+
+      setTitle("");
+      setDescription("");
+      setSubject("");
+      setDeadline("");
+      setFile(null);
+
+      loadAssignments();
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
 
   const handleDeleteAssignment =
     async (id: string) => {
@@ -185,6 +225,24 @@ export function Assignments() {
             }
             className="w-full border p-3 rounded-lg"
           />
+
+<input
+  type="file"
+
+  accept=".pdf,.doc,.docx"
+
+  onChange={(e) =>
+
+    setFile(
+
+      e.target.files?.[0] || null
+
+    )
+
+  }
+
+  className="w-full border p-3 rounded-lg"
+/>
 
           <Button
             onClick={
