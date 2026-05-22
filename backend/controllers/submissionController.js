@@ -56,10 +56,11 @@ const addSubmission =
             req.body.assignmentId,
 
           studentId:
-            req.user.id,
+            req.user._id,
 
-          studentName:
-            req.user.name,
+studentName:
+  req.user.name ||
+  "Student",
 
           fileUrl:
             req.file
@@ -101,8 +102,8 @@ const checkSubmission =
           assignmentId:
             req.params.assignmentId,
 
-          studentId:
-            req.user.id
+studentId:
+  req.user._id,
 
         });
 
