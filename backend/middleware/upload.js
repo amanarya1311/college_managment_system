@@ -26,7 +26,10 @@ const storage =
       allowed_formats: [
         "jpg",
         "jpeg",
-        "png"
+        "png",
+        "pdf",
+        "doc",
+        "docx"
       ],
 
     }),
