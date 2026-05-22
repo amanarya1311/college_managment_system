@@ -208,7 +208,7 @@ navigation.push({
             <GraduationCap className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-base text-gray-900">CSIT Department</h1>
+            <h1 className="font-bold text-base text-gray-900">MJPRU Campus</h1>
           </div>
         </div>
         <Button
@@ -233,8 +233,8 @@ navigation.push({
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="font-bold text-lg text-gray-900">CSIT Department</h1>
-              <p className="text-xs text-gray-500">MJPRU Bareilly</p>
+              <h1 className="font-bold text-lg text-gray-900">MJPRU Campus</h1>
+              <p className="text-xs text-gray-500">Smart Academic Management System</p>
             </div>
           </div>
         </div>

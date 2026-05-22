@@ -126,7 +126,7 @@ export function FacultyLayout() {
 
             <h1 className="font-bold text-base text-gray-900">
 
-              Alta School
+              MJPRU Campus
 
             </h1>
 
@@ -177,19 +177,13 @@ export function FacultyLayout() {
 
               <h1 className="font-bold text-lg text-gray-900">
 
-                CSIT Department
+                MJPRU Campus
 
               </h1>
 
               <p className="text-xs text-gray-500">
 
-                Faculty Portal
-
-              </p>
-
-              <p className="text-xs text-gray-500">
-
-                MJPRU Bareilly
+                Smart Academic Management System
 
               </p>
 

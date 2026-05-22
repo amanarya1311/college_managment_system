@@ -99,7 +99,7 @@ export function StudentLayout() {
 
             <h1 className="font-bold text-base text-gray-900">
 
-              CSIT Department
+              MJPRU Campus
 
             </h1>
 
@@ -150,13 +150,13 @@ export function StudentLayout() {
 
               <h1 className="font-bold text-lg text-gray-900">
 
-                CSIT Department
+                MJPRU Campus
 
               </h1>
 
               <p className="text-xs text-gray-600">
 
-                MJPRU Bareilly
+                Smart Academic Management System
 
               </p>
 

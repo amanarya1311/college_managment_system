@@ -166,15 +166,11 @@ setRole(role);
 </div>
 
           <h1 className="text-3xl font-bold text-gray-900">
-            CSIT Department
+            MJPRU Campus
           </h1>
 
           <p className="text-gray-600">
-            MJPRU Bareilly
-          </p>
-
-          <p className="text-sm text-gray-500 mt-2">
-            Attendance Portal
+            Smart Academic Management System
           </p>
 
         </div>
@@ -289,48 +285,6 @@ setRole(role);
           </Button>
 
         </form>
-
-        <div className="mt-6 pt-6 border-t border-gray-200">
-
-          <p className="text-xs text-gray-500 text-center mb-3">
-            Demo Login
-          </p>
-
-          <div className="grid grid-cols-3 gap-2">
-
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => quickLogin("admin")}
-              className="text-xs"
-            >
-              Admin
-            </Button>
-
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => quickLogin("faculty")}
-              className="text-xs"
-            >
-              Faculty
-            </Button>
-
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => quickLogin("student")}
-              className="text-xs"
-            >
-              Student
-            </Button>
-
-          </div>
-
-        </div>
 
       </Card>
 
