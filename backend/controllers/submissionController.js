@@ -1,5 +1,6 @@
-const Submission =
-  require("../models/Submission");
+const Student =require("../models/Student");
+
+const Submission =require("../models/Submission");
 
 
 // GET ALL SUBMISSIONS
@@ -48,34 +49,36 @@ const addSubmission =
 
     try {
 
-      console.log(req.user);
+const student =
 
-      const submission =
+  await Student.findById(
+    req.user.id
+  );
 
-        await Submission.create({
+const submission =
 
-          assignmentId:
-            req.body.assignmentId,
+  await Submission.create({
 
-          studentId:
-            req.user.id,
+    assignmentId:
+      req.body.assignmentId,
 
-          studentName:
-            req.user.fullName ||
-            req.user.name ||
-            req.user.email ||
-            "Student",
+    studentId:
+      req.user.id,
 
-          fileUrl:
-            req.file
-              ? `/uploads/${req.file.filename}`
-              : "",
+    studentName:
+      student?.name ||
+      "Student",
 
-          originalFileName:
-            req.file?.originalname ||
-            "submission.pdf",
+    fileUrl:
+      req.file
+        ? `/uploads/${req.file.filename}`
+        : "",
 
-        });
+    originalFileName:
+      req.file?.originalname ||
+      "submission.pdf",
+
+  });
 
       res.status(201).json(
         submission
