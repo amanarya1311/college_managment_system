@@ -46,6 +46,20 @@ export function Assignments() {
     null
   );
 
+  const [submissionFile,
+  setSubmissionFile] =
+  useState<File | null>(
+    null
+  );
+
+  const [submissions,
+  setSubmissions] =
+  useState<any>({});
+
+  const [submissionStatus,
+  setSubmissionStatus] =
+  useState<any>({});
+
   const loadAssignments =
     async () => {
 
@@ -68,11 +82,45 @@ export function Assignments() {
 
     };
 
-  useEffect(() => {
+useEffect(() => {
 
-    loadAssignments();
+  loadAssignments();
 
-  }, []);
+}, []);
+
+
+useEffect(() => {
+
+  if (
+
+    user?.role ===
+    "student"
+
+  ) {
+
+    assignments.forEach(
+
+      (assignment) => {
+
+        checkSubmissionStatus(
+
+          assignment._id
+
+        );
+
+      }
+
+    );
+
+  }
+
+}, [
+
+  assignments,
+
+  user
+
+]);
 
 const handleAddAssignment =
   async () => {
@@ -130,6 +178,7 @@ const handleAddAssignment =
 
       );
 
+
       setTitle("");
       setDescription("");
       setSubject("");
@@ -145,6 +194,142 @@ const handleAddAssignment =
     }
 
   };
+
+  const handleSubmission =
+  async (
+    assignmentId: string
+  ) => {
+
+    try {
+
+      if (!submissionFile) {
+
+        alert(
+          "Please select a file"
+        );
+
+        return;
+
+      }
+
+      const formData =
+        new FormData();
+
+      formData.append(
+        "assignmentId",
+        assignmentId
+      );
+
+      formData.append(
+        "file",
+        submissionFile
+      );
+
+      await api.post(
+
+        "/api/submissions",
+
+        formData,
+
+        {
+
+          headers: {
+
+            "Content-Type":
+              "multipart/form-data"
+
+          }
+
+        }
+
+      );
+
+      alert(
+        "Assignment submitted successfully"
+      );
+
+      setSubmissionFile(
+        null
+      );
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
+const checkSubmissionStatus =
+  async (
+    assignmentId: string
+  ) => {
+
+    try {
+
+      const response =
+        await api.get(
+
+          `/api/submissions/check/${assignmentId}`
+
+        );
+
+      setSubmissionStatus(
+
+        (prev: any) => ({
+
+          ...prev,
+
+          [assignmentId]:
+            response.data.submitted
+
+        })
+
+      );
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
+  const loadSubmissions =
+  async (
+    assignmentId: string
+  ) => {
+
+    try {
+
+      const response =
+        await api.get(
+
+          `/api/submissions/${assignmentId}`
+
+        );
+
+      setSubmissions(
+
+        (prev: any) => ({
+
+          ...prev,
+
+          [assignmentId]:
+            response.data
+
+        })
+
+      );
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
 
   const handleDeleteAssignment =
     async (id: string) => {
@@ -323,10 +508,13 @@ const handleAddAssignment =
 
               </div>
 
-              <p className="text-gray-600">
+<p className="text-gray-600">
 
-                {assignment.description}
-                {assignment.fileUrl && (
+  {assignment.description}
+
+</p>
+
+{assignment.fileUrl && (
 
   <a
 
@@ -350,7 +538,169 @@ const handleAddAssignment =
 
 )}
 
+{user?.role ===
+  "student" && (
+
+  <div className="pt-3">
+
+    {submissionStatus[
+      assignment._id
+    ] ? (
+
+      <span className="text-green-600 font-medium">
+
+        ✅ Submitted
+
+      </span>
+
+    ) : (
+
+      <span className="text-red-500 font-medium">
+
+        ❌ Not Submitted
+
+      </span>
+
+    )}
+
+  </div>
+
+)}
+              
+{user?.role ===
+  "student" && (
+
+  <div className="space-y-3 pt-3">
+
+    <input
+
+      type="file"
+
+      accept=".pdf,.doc,.docx"
+
+      onChange={(e) =>
+
+        setSubmissionFile(
+
+          e.target.files?.[0] || null
+
+        )
+
+      }
+
+      className="w-full border p-2 rounded-lg"
+
+    />
+
+    <Button
+
+      onClick={() =>
+
+        handleSubmission(
+          assignment._id
+        )
+
+      }
+
+    >
+
+      Submit Assignment
+
+    </Button>
+
+  </div>
+
+)}
+{(user?.role ===
+  "faculty" ||
+
+  user?.role ===
+  "admin") && (
+
+  <div className="pt-4">
+
+    <Button
+
+      variant="outline"
+
+      onClick={() =>
+
+        loadSubmissions(
+          assignment._id
+        )
+
+      }
+
+    >
+
+      View Submissions
+
+    </Button>
+
+    {submissions[
+      assignment._id
+    ] && (
+
+      <div className="mt-4 space-y-3">
+
+        {submissions[
+          assignment._id
+        ].map(
+          (
+            submission: any
+          ) => (
+
+            <div
+
+              key={
+                submission._id
+              }
+
+              className="border rounded-lg p-3"
+
+            >
+
+              <p className="font-medium">
+
+                {
+                  submission.studentName
+                }
+
               </p>
+
+              <a
+
+                href={`https://college-managment-system-l5bx.onrender.com${submission.fileUrl}`}
+
+                download={
+                  submission.originalFileName
+                }
+
+                target="_blank"
+
+                rel="noopener noreferrer"
+
+                className="text-blue-600 hover:underline text-sm"
+
+              >
+
+                📄 Download Submission
+
+              </a>
+
+            </div>
+
+          )
+
+        )}
+
+      </div>
+
+    )}
+
+  </div>
+
+)}
 
               <p className="text-sm text-gray-400">
 

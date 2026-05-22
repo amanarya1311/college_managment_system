@@ -89,10 +89,49 @@ const addSubmission =
 
 };
 
+const checkSubmission =
+  async (req, res) => {
+
+    try {
+
+      const submission =
+
+        await Submission.findOne({
+
+          assignmentId:
+            req.params.assignmentId,
+
+          studentId:
+            req.user.id
+
+        });
+
+      res.json({
+
+        submitted:
+          !!submission
+
+      });
+
+    } catch (error) {
+
+      res.status(500).json({
+
+        message:
+          error.message
+
+      });
+
+    }
+
+};
+
 module.exports = {
 
   getSubmissions,
 
-  addSubmission
+  addSubmission,
+
+  checkSubmission
 
 };

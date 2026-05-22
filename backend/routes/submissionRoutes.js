@@ -17,7 +17,9 @@ const {
 
   getSubmissions,
 
-  addSubmission
+  addSubmission,
+
+  checkSubmission
 
 } = require(
   "../controllers/submissionController"
@@ -63,6 +65,19 @@ router.post(
 
 );
 
+router.get(
+
+  "/check/:assignmentId",
+
+  authMiddleware,
+
+  roleMiddleware(
+    "student"
+  ),
+
+  checkSubmission
+
+);
 
 module.exports =
   router;
