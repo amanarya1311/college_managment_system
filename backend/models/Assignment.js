@@ -44,6 +44,15 @@ const assignmentSchema =
 
       },
 
+      originalFileName: {
+
+        type: String,
+
+        default:
+          "assignment.pdf"
+
+      },
+
       postedBy: {
 
         type: String

@@ -71,9 +71,7 @@ const assignment =
       req.file?.path || "",
 
     originalFileName:
-      req.file?.original_filename ||
-      req.file?.originalname ||
-      "assignment.pdf",
+      req.file?.originalname || "assignment.pdf",
 
     postedBy:
       req.user.role
