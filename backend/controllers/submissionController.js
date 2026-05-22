@@ -59,7 +59,9 @@ studentId:
   req.user.id,
 
 studentName:
+  req.user.fullName ||
   req.user.name ||
+  req.user.email ||
   "Student",
 
           fileUrl:
