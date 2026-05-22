@@ -14,10 +14,10 @@ const storage =
         cb
       ) {
 
-        cb(
-          null,
-          "uploads/"
-        );
+cb(
+  null,
+  "backend/uploads/"
+);
 
       },
 
