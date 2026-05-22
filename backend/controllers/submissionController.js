@@ -48,6 +48,8 @@ const addSubmission =
 
     try {
 
+      console.log(req.user);
+
       const submission =
 
         await Submission.create({
@@ -55,14 +57,14 @@ const addSubmission =
           assignmentId:
             req.body.assignmentId,
 
-studentId:
-  req.user.id,
+          studentId:
+            req.user.id,
 
-studentName:
-  req.user.fullName ||
-  req.user.name ||
-  req.user.email ||
-  "Student",
+          studentName:
+            req.user.fullName ||
+            req.user.name ||
+            req.user.email ||
+            "Student",
 
           fileUrl:
             req.file
