@@ -55,8 +55,8 @@ const addSubmission =
           assignmentId:
             req.body.assignmentId,
 
-          studentId:
-            req.user._id,
+studentId:
+  req.user.id,
 
 studentName:
   req.user.name ||

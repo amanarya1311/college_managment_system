@@ -252,11 +252,21 @@ const handleAddAssignment =
         null
       );
 
-    } catch (error) {
+    } 
+    
+    catch (error: any) {
 
-      console.log(error);
+  console.log(
 
-    }
+    error.response?.data ||
+
+    error.message ||
+
+    error
+
+  );
+
+}
 
   };
 
