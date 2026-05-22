@@ -326,27 +326,29 @@ const handleAddAssignment =
               <p className="text-gray-600">
 
                 {assignment.description}
-                {assignment.fileUrl && (
+ {assignment.fileUrl && (
 
-              <a
+  <a
 
-              href={assignment.fileUrl}
+    href={assignment.fileUrl}
 
-              download
+    download={
+      assignment.originalFileName
+    }
 
-              target="_blank"
+    target="_blank"
 
-              rel="noopener noreferrer"
+    rel="noopener noreferrer"
 
-              className="inline-block mt-3 text-blue-600 font-medium hover:underline"
+    className="inline-block mt-3 text-blue-600 font-medium hover:underline"
 
-            >
+  >
 
-            📄 Download Assignment
+    📄 Download Assignment
 
-            </a>
+  </a>
 
-            )}
+)}
 
               </p>
 

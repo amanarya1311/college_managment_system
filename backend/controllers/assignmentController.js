@@ -55,24 +55,30 @@ const addAssignment =
 
       } = req.body;
 
-      const assignment =
+const assignment =
 
-        await Assignment.create({
+  await Assignment.create({
 
-          title,
+    title,
 
-          description,
+    description,
 
-          subject,
+    subject,
 
-          deadline,
+    deadline,
 
-          fileUrl:req.file?.path || "",
+    fileUrl:
+      req.file?.path || "",
 
-          postedBy:
-            req.user.role
+    originalFileName:
+      req.file?.original_filename ||
+      req.file?.originalname ||
+      "assignment.pdf",
 
-        });
+    postedBy:
+      req.user.role
+
+  });
 
       res.status(201).json(
         assignment
