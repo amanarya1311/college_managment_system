@@ -23,14 +23,14 @@ const storage =
       folder:
         "college-management",
 
-      allowed_formats: [
-        "jpg",
-        "jpeg",
-        "png",
-        "pdf",
-        "doc",
-        "docx"
-      ],
+      resource_type:
+        "auto",
+
+      format:
+        file.mimetype ===
+        "application/pdf"
+          ? "pdf"
+          : undefined,
 
     }),
 
