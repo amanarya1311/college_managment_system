@@ -25,6 +25,8 @@ import { Reports } from "./components/Reports";
 import { Notices }
 from "./components/Notices";
 
+import { Assignments } from "./components/Assignments";
+
 import { ChangePassword } from "./components/ChangePassword";
 
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -317,6 +319,66 @@ export const router =
     >
 
       <Notices />
+
+    </ProtectedRoute>
+
+  ),
+
+},
+
+{
+
+  path: "faculty/assignments",
+
+  element: (
+
+    <ProtectedRoute
+      allowedRoles={[
+        "faculty",
+      ]}
+    >
+
+      <Assignments />
+
+    </ProtectedRoute>
+
+  ),
+
+},
+
+{
+
+  path: "student/assignments",
+
+  element: (
+
+    <ProtectedRoute
+      allowedRoles={[
+        "student",
+      ]}
+    >
+
+      <Assignments />
+
+    </ProtectedRoute>
+
+  ),
+
+},
+
+{
+
+  path: "assignments",
+
+  element: (
+
+    <ProtectedRoute
+      allowedRoles={[
+        "admin",
+      ]}
+    >
+
+      <Assignments />
 
     </ProtectedRoute>
 

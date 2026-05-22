@@ -3,6 +3,9 @@ require("dotenv").config();
 const noticeRoutes =
   require("./routes/noticeRoutes");
 
+  const assignmentRoutes =
+  require("./routes/assignmentRoutes");
+
 const studentManagementRoutes =
 require("./routes/studentManagementRoutes");
 
@@ -65,6 +68,14 @@ app.use(
   "/api/notices",
 
   noticeRoutes
+
+);
+
+app.use(
+
+  "/api/assignments",
+
+  assignmentRoutes
 
 );
 

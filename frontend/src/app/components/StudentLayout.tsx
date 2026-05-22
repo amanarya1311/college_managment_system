@@ -8,7 +8,8 @@ import {
   LogOut,
   Menu,
   X,
-  Bell
+  Bell,
+  BookOpen
 } from "lucide-react";
 
 import { useAuth } from "../contexts/AuthContext";
@@ -42,6 +43,12 @@ export function StudentLayout() {
       name: "Notices",
       href: "/student/notices",
       icon: Bell
+    },
+
+    {
+      name: "Assignments",
+      href: "/student/assignments",
+      icon: BookOpen
     },
 
   ];
