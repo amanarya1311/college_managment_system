@@ -230,12 +230,17 @@ await api.delete(
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Name
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Department
-                </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Semester
-                </th>
+<th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  Department
+</th>
+
+<th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  Course
+</th>
+
+<th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  Semester
+</th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Contact
                 </th>
@@ -272,12 +277,17 @@ await api.delete(
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {student.department}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {student.semester}
-                    </td>
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+  {student.department}
+</td>
+
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+  {student.course}
+</td>
+
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+  {student.semester}
+</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                      {student.email}
                     </td>
@@ -367,19 +377,13 @@ function StudentForm({
 }) {
 
 const [formData, setFormData] = useState({
-
   rollNo: student?.rollNo || "",
-
   name: student?.name || "",
-
   email: student?.email || "",
-
   password: "",
-
   department: student?.department || "",
-
+  course: student?.course || "",
   semester: student?.semester?.toString() || "1",
-
 });
 
  useEffect(() => {
@@ -396,9 +400,9 @@ const [formData, setFormData] = useState({
 
       password: "",
 
-      department: student.department || "",
-
-      semester: student.semester?.toString() || "1",
+department: student.department || "",
+course: student.course || "",
+semester: student.semester?.toString() || "1",
 
     });
 
@@ -426,6 +430,8 @@ const studentData: any = {
   department: formData.department,
 
   semester: parseInt(formData.semester),
+
+  course: formData.course,
 
 };
 
@@ -651,6 +657,58 @@ await api.post(
         </Select>
 
       </div>
+
+      <div>
+
+  <Label htmlFor="course">
+    Course
+  </Label>
+
+  <Select
+    value={formData.course}
+    onValueChange={(value) =>
+      setFormData({
+        ...formData,
+        course: value
+      })
+    }
+  >
+
+    <SelectTrigger>
+      <SelectValue placeholder="Select Course" />
+    </SelectTrigger>
+
+    <SelectContent>
+
+      <SelectItem value="PGDCA">
+        PGDCA
+      </SelectItem>
+
+      <SelectItem value="MCA">
+        MCA
+      </SelectItem>
+
+      <SelectItem value="B.Tech">
+        B.Tech
+      </SelectItem>
+
+      <SelectItem value="M.Tech">
+        M.Tech
+      </SelectItem>
+
+      <SelectItem value="PhD">
+        PhD
+      </SelectItem>
+
+      <SelectItem value="M.Tech + PhD">
+        M.Tech + PhD
+      </SelectItem>
+
+    </SelectContent>
+
+  </Select>
+
+</div>
 
       <div className="flex justify-end gap-2 pt-4">
 

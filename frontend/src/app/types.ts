@@ -18,6 +18,8 @@ export interface Student {
 
   department: string;
 
+  course: string;
+
   semester: number;
 
   enrollmentDate?: string;

@@ -35,16 +35,28 @@ const studentSchema =
   default: ""
 },
 
-    department: {
-      type: String,
-      required: true
-    },
+department: {
+  type: String,
+  required: true
+},
 
-    semester: {
-      type: Number,
-      required: true
-    },
+course: {
+  type: String,
+  required: true,
+  enum: [
+    "PGDCA",
+    "MCA",
+    "B.Tech",
+    "M.Tech",
+    "PhD",
+    "M.Tech + PhD"
+  ]
+},
 
+semester: {
+  type: Number,
+  required: true
+},
     attendancePercentage: {
       type: Number,
       default: 0

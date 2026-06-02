@@ -47,21 +47,23 @@ const addStudent =
 
     try {
 
-      const {
+const {
 
-        name,
+  name,
 
-        rollNo,
+  rollNo,
 
-        email,
+  email,
 
-        password,
+  password,
 
-        department,
+  department,
 
-        semester
+  course,
 
-      } = req.body;
+  semester
+
+} = req.body;
 
       const existingStudent =
         await Student.findOne({
@@ -107,6 +109,8 @@ const addStudent =
             hashedPassword,
 
           department,
+
+          course,
 
           semester
 
@@ -375,11 +379,14 @@ user: {
   studentId:
     student._id,
 
-  department:
-    student.department,
+department:
+  student.department,
 
-  semester:
-    student.semester,
+course:
+  student.course,
+
+semester:
+  student.semester,
 
   phone:
     student.phone,
