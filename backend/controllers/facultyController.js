@@ -105,8 +105,11 @@ user: {
   phone:
     faculty.phone,
 
-  profileImage:
-    faculty.profileImage
+profileImage:
+  faculty.profileImage,
+
+subject:
+  faculty.subject,
 
 },
 
@@ -133,23 +136,25 @@ const addFaculty =
 
     try {
 
-      const {
+const {
 
-        firstName,
+  firstName,
 
-        lastName,
+  lastName,
 
-        email,
+  email,
 
-        password,
+  password,
 
-        department,
+  department,
 
-        designation,
+  designation,
 
-        phone
+  subject,
 
-      } = req.body;
+  phone
+
+} = req.body;
 
       const existingFaculty =
         await Faculty.findOne({
@@ -195,6 +200,8 @@ const faculty =
 
     designation,
 
+    subject,
+
     phone
 
   });
@@ -225,15 +232,16 @@ const updateFaculty =
 
     try {
 
-      const {
+const {
 
-        name,
-        phone,
-        department,
-        designation,
-        profileImage
+  name,
+  phone,
+  department,
+  designation,
+  subject,
+  profileImage
 
-      } = req.body;
+} = req.body;
 
       const updatedFaculty =
         await Faculty.findByIdAndUpdate(
@@ -246,6 +254,7 @@ const updateFaculty =
             phone,
             department,
             designation,
+            subject,
             profileImage
 
           },

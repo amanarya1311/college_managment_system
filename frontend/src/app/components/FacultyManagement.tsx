@@ -232,6 +232,9 @@ await api.delete(
                   Designation
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  Subject
+</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Phone
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -256,6 +259,9 @@ await api.delete(
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {member.designation}
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+  {member.subject}
+</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {member.phone}
                   </td>
@@ -333,6 +339,7 @@ function FacultyForm({
     phone: faculty?.phone || "",
     department: faculty?.department || "",
     designation: faculty?.designation || "",
+    subject: faculty?.subject || "",
     dateOfJoining: faculty?.dateOfJoining || new Date().toISOString().split("T")[0],
     password: faculty?.password || "faculty123",
   });
@@ -482,6 +489,21 @@ await api.post(
 
       <div>
         <Label htmlFor="designation">Designation</Label>
+        <div>
+  <Label htmlFor="subject">Subject</Label>
+  <Input
+    id="subject"
+    required
+    value={formData.subject}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        subject: e.target.value,
+      })
+    }
+    placeholder="Enter Subject"
+  />
+</div>
         <Select
           value={formData.designation}
           onValueChange={(value) => setFormData({ ...formData, designation: value })}

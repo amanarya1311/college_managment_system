@@ -22,6 +22,11 @@ const facultySchema =
     profileImage: {
       type: String,
       default: ""
+    },
+
+    subject: {
+      type: String,
+      default: ""
     }
 
   });

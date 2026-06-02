@@ -103,6 +103,8 @@ export interface Faculty {
 
   designation: string;
 
+  subject: string;
+
   dateOfJoining: string;
 
   password?: string;
