@@ -320,15 +320,32 @@ const response =
 
             <div>
 
-              <h3 className="font-semibold text-red-900">
-                Low Attendance Warning
-              </h3>
+<h3 className="font-semibold text-red-900">
+  🤖 AI Attendance Advisor
+</h3>
 
-              <p className="text-sm text-red-700 mt-1">
+<p className="text-sm text-red-700 mt-1">
+  Current Attendance: {stats.percentage.toFixed(1)}%
+</p>
 
-                Your attendance is below the required 75%.
+<p className="text-sm text-red-700 mt-1">
+  Risk Level: {
+    stats.percentage < 50
+      ? "High Risk"
+      : stats.percentage < 75
+      ? "Medium Risk"
+      : "Safe"
+  }
+</p>
 
-              </p>
+<p className="text-sm text-red-700 mt-1">
+  Recommendation:
+  {
+    stats.percentage < 50
+      ? " Immediate attention required. Attend all upcoming classes."
+      : " Attend the next 3 classes continuously to improve your attendance percentage."
+  }
+</p>
 
             </div>
 
