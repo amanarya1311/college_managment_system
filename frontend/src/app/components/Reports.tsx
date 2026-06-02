@@ -42,6 +42,8 @@ export function Reports() {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [selectedSemester, setSelectedSemester] = useState("all");
   const [selectedCourse, setSelectedCourse] = useState("all");
+  const [selectedSubject, setSelectedSubject] =
+  useState("all");
   const [editingRecord, setEditingRecord] = useState<AttendanceRecord | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
@@ -303,20 +305,26 @@ const filteredRecords = records.filter((record) => {
     selectedSemester === "all" ||
     student.semester.toString() === selectedSemester;
 
+  const matchesSubject =
+    selectedSubject === "all" ||
+    (record as any).subject === selectedSubject;
+
   return (
     matchesDept &&
     matchesCourse &&
-    matchesSem
+    matchesSem &&
+    matchesSubject
   );
 
 });
   
   const departments = Array.from(new Set(students.map((s) => s.department)));
   const semesters = Array.from(new Set(students.map((s) => s.semester))).sort();
-  const courses = Array.from(
+  const courses = Array.from(new Set(students.map((s) => s.course).filter(Boolean)));
+const subjects = Array.from(
   new Set(
-    students
-      .map((s) => s.course)
+    records
+      .map((record: any) => record.subject)
       .filter(Boolean)
   )
 );
@@ -459,7 +467,7 @@ const filteredRecords = records.filter((record) => {
       
       {/* Filters */}
       <Card className="p-4 sm:p-6 mb-4 sm:mb-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div>
             <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
               <SelectTrigger>
@@ -507,6 +515,34 @@ const filteredRecords = records.filter((record) => {
               </SelectContent>
             </Select>
           </div>
+          <div>
+  <Select
+    value={selectedSubject}
+    onValueChange={setSelectedSubject}
+  >
+    <SelectTrigger>
+      <SelectValue placeholder="Filter by subject" />
+    </SelectTrigger>
+
+    <SelectContent>
+
+      <SelectItem value="all">
+        All Subjects
+      </SelectItem>
+
+      {subjects.map((subject) => (
+        <SelectItem
+          key={subject}
+          value={subject}
+        >
+          {subject}
+        </SelectItem>
+      ))}
+
+    </SelectContent>
+
+  </Select>
+</div>
         </div>
       </Card>
       
