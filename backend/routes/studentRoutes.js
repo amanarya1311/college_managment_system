@@ -175,6 +175,47 @@ router.post(
 
 );
 
+// UPDATE STUDENT PROFILE
+
+router.put(
+
+  "/profile",
+
+  async (req, res) => {
+
+try {
+
+  console.log(
+    "PROFILE UPDATE BODY:",
+    req.body
+  );
+
+  console.log(
+    "PHONE:",
+    req.body.phone
+  );
+
+  console.log(
+    "COURSE:",
+    req.body.course
+  );
+
+  const updatedStudent =
+    await Student.findByIdAndUpdate(
+      req.body.studentId,
+      {
+        name: req.body.name,
+        phone: req.body.phone,
+        department: req.body.department,
+        course: req.body.course,
+        semester: req.body.semester,
+        profileImage: req.body.profileImage
+      },
+      {
+        new: true
+      }
+    );
+
 
 // UPDATE STUDENT
 
@@ -211,43 +252,14 @@ router.delete(
 
 );
 
-// UPDATE STUDENT PROFILE
+  console.log(
+    "UPDATED STUDENT:",
+    updatedStudent
+  );
 
-router.put(
-
-  "/profile",
-
-  async (req, res) => {
-
-    try {
-
-      console.log(
-        "PROFILE UPDATE BODY:",
-        req.body
-      );
-
-      const updatedStudent =
-
-await Student.findByIdAndUpdate(
-  req.body.studentId,
-  {
-    name: req.body.name,
-    phone: req.body.phone,
-    department: req.body.department,
-    course: req.body.course,
-    semester: req.body.semester,
-    profileImage: req.body.profileImage
-  },
-  {
-    new: true
-  }
-);
-      res.json({
-
-        user:
-          updatedStudent
-
-      });
+  res.json({
+    user: updatedStudent
+  });
 
     } catch (error) {
 

@@ -623,6 +623,12 @@ onClick={async () => {
     }
 
     // UPDATE PROFILE
+
+    console.log("SENDING DATA:", {
+  ...formData,
+  profileImage: imageUrl,
+  studentId: student?._id
+});
     
 const response =
   await api.put(
