@@ -137,23 +137,14 @@ const addFaculty =
     try {
 
 const {
-
-  firstName,
-
+  name,
   lastName,
-
   email,
-
   password,
-
   department,
-
   designation,
-
   subject,
-
   phone
-
 } = req.body;
 
       const existingFaculty =
@@ -189,7 +180,7 @@ const faculty =
   await Faculty.create({
 
     name:
-      `${firstName} ${lastName}`,
+      `${name} ${lastName}`,
 
     email,
 
