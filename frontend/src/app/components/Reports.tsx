@@ -41,6 +41,7 @@ export function Reports() {
   const [records, setRecords] = useState<AttendanceRecord[]>([]);
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [selectedSemester, setSelectedSemester] = useState("all");
+  const [selectedCourse, setSelectedCourse] = useState("all");
   const [editingRecord, setEditingRecord] = useState<AttendanceRecord | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
@@ -115,8 +116,8 @@ useEffect(() => {
   };
   const exportToExcel = () => {
 
-  const exportData =
-    records.map((record) => {
+const exportData =
+  filteredRecords.map((record) => {
 
       const student =
         students.find(
@@ -210,7 +211,7 @@ const exportToPDF = () => {
   );
 
   const tableData =
-    records.map((record) => {
+    filteredRecords.map((record) => {
 
       const student =
         students.find(
@@ -260,19 +261,70 @@ const exportToPDF = () => {
 
 };
 
-  const filteredStudents = students.filter((s) => {
-    const matchesDept = selectedDepartment === "all" || s.department === selectedDepartment;
-    const matchesSem = selectedSemester === "all" || s.semester.toString() === selectedSemester;
-    return matchesDept && matchesSem;
-  });
+const filteredStudents = students.filter((s) => {
+
+  const matchesDept =
+    selectedDepartment === "all" ||
+    s.department === selectedDepartment;
+
+  const matchesCourse =
+    selectedCourse === "all" ||
+    s.course === selectedCourse;
+
+  const matchesSem =
+    selectedSemester === "all" ||
+    s.semester.toString() === selectedSemester;
+
+  return (
+    matchesDept &&
+    matchesCourse &&
+    matchesSem
+  );
+
+});
+
+const filteredRecords = records.filter((record) => {
+
+  const student = students.find(
+    (s) => s._id === record.studentId?._id
+  );
+
+  if (!student) return false;
+
+  const matchesDept =
+    selectedDepartment === "all" ||
+    student.department === selectedDepartment;
+
+  const matchesCourse =
+    selectedCourse === "all" ||
+    student.course === selectedCourse;
+
+  const matchesSem =
+    selectedSemester === "all" ||
+    student.semester.toString() === selectedSemester;
+
+  return (
+    matchesDept &&
+    matchesCourse &&
+    matchesSem
+  );
+
+});
   
   const departments = Array.from(new Set(students.map((s) => s.department)));
   const semesters = Array.from(new Set(students.map((s) => s.semester))).sort();
+  const courses = Array.from(
+  new Set(
+    students
+      .map((s) => s.course)
+      .filter(Boolean)
+  )
+);
   
   // Department-wise attendance data
   const departmentData = departments.map((dept, index) => {
     const deptStudents = students.filter((s) => s.department === dept);
-    const deptRecords = records.filter((r) =>
+    const deptRecords = filteredRecords.filter((r) =>
       deptStudents.some((s) => s._id === r.studentId?._id)
 
     );
@@ -295,19 +347,19 @@ const exportToPDF = () => {
     {
       id: "status-present",
       name: "Present",
-      value: records.filter((r) => r.status === "present").length,
+   value: filteredRecords.filter((r) => r.status === "present").length,
       color: "#10b981",
     },
     {
       id: "status-absent",
       name: "Absent",
-      value: records.filter((r) => r.status === "absent").length,
+      value: filteredRecords.filter((r) => r.status === "absent").length,
       color: "#ef4444",
     },
     {
       id: "status-late",
       name: "Late",
-      value: records.filter((r) => r.status === "late").length,
+      value: filteredRecords.filter((r) => r.status === "late").length,
       color: "#f59e0b",
     },
   ];
@@ -320,7 +372,7 @@ const exportToPDF = () => {
   });
 
   const dailyTrendData = last7Days.map((date, index) => {
-    const dayRecords = records.filter((r) => r.date === date);
+    const dayRecords = filteredRecords.filter((r) => r.date === date);
     const present = dayRecords.filter((r) => r.status === "present").length;
     const absent = dayRecords.filter((r) => r.status === "absent").length;
 
@@ -337,7 +389,7 @@ const exportToPDF = () => {
   .map((student) => {
 
     const studentRecords =
-      records.filter(
+      filteredRecords.filter(
         (r) =>
           r.studentId?._id === student._id
       );
@@ -407,7 +459,7 @@ const exportToPDF = () => {
       
       {/* Filters */}
       <Card className="p-4 sm:p-6 mb-4 sm:mb-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
               <SelectTrigger>
@@ -434,6 +486,22 @@ const exportToPDF = () => {
                 {semesters.map((sem) => (
                   <SelectItem key={sem} value={sem.toString()}>
                     Semester {sem}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div>
+            <Select value={selectedCourse} onValueChange={setSelectedCourse}>
+              <SelectTrigger>
+                <SelectValue placeholder="Filter by course" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Courses</SelectItem>
+                {courses.map((course) => (
+                  <SelectItem key={course} value={course}>
+                    {course}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -614,7 +682,7 @@ const exportToPDF = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {records
+              {filteredRecords
                 .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                 .slice(0, 50)
                 .map((record) => {
@@ -661,7 +729,7 @@ const exportToPDF = () => {
             </tbody>
           </table>
 
-          {records.length === 0 && (
+          {filteredRecords.length === 0 && (
             <div className="text-center py-12">
               <p className="text-gray-500">No attendance records yet</p>
             </div>
