@@ -37,6 +37,7 @@ export function Students() {
   const [searchQuery, setSearchQuery] = useState("");
   const [departmentFilter, setDepartmentFilter] = useState("all");
   const [semesterFilter, setSemesterFilter] = useState("all");
+  const [courseFilter, setCourseFilter] = useState("all");
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
   
@@ -90,6 +91,10 @@ const filteredStudents = students.filter((student) => {
 
     student.semester.toString() === semesterFilter;
 
+    const matchesCourse =
+  courseFilter === "all" ||
+  student.course === courseFilter;
+
   const matchesFacultyDepartment =
 
     user?.role === "faculty"
@@ -98,22 +103,25 @@ const filteredStudents = students.filter((student) => {
 
       : true;
 
-  return (
-
-    matchesSearch &&
-
-    matchesDepartment &&
-
-    matchesSemester &&
-
-    matchesFacultyDepartment
-
-  );
+return (
+  matchesSearch &&
+  matchesDepartment &&
+  matchesSemester &&
+  matchesCourse &&
+  matchesFacultyDepartment
+);
 
 });
   
   const departments = Array.from(new Set(students.map((s) => s.department)));
   const semesters = Array.from(new Set(students.map((s) => s.semester))).sort();
+  const courses = Array.from(
+  new Set(
+    students
+      .map((s) => s.course)
+      .filter(Boolean)
+  )
+);
   
   const handleDelete = async (
   id: string
@@ -177,7 +185,7 @@ await api.delete(
       
       {/* Filters */}
       <Card className="p-4 sm:p-6 mb-4 sm:mb-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <Input
@@ -215,6 +223,32 @@ await api.delete(
               ))}
             </SelectContent>
           </Select>
+          <Select
+  value={courseFilter}
+  onValueChange={setCourseFilter}
+>
+  <SelectTrigger>
+    <SelectValue placeholder="Filter by course" />
+  </SelectTrigger>
+
+  <SelectContent>
+
+    <SelectItem value="all">
+      All Courses
+    </SelectItem>
+
+    {courses.map((course) => (
+      <SelectItem
+        key={course}
+        value={course}
+      >
+        {course}
+      </SelectItem>
+    ))}
+
+  </SelectContent>
+
+</Select>
         </div>
       </Card>
       
