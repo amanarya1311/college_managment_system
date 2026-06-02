@@ -330,12 +330,7 @@ src={
                 <Hash className="w-4 h-4 text-gray-400" />
                 <span className="text-gray-700">Semester {student.semester}</span>
               </div>
-              
-              <div className="flex items-center gap-3 text-sm">
-                <Calendar className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-700">
-                </span>
-              </div>
+            
             </div>
           </div>
         </Card>

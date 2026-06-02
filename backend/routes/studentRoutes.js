@@ -228,37 +228,20 @@ router.put(
 
       const updatedStudent =
 
-        await Student.findByIdAndUpdate(
-
-          req.body.studentId,
-
-          {
-
-            name:
-              req.body.name,
-
-            phone:
-              req.body.phone,
-
-            department:
-              req.body.department,
-
-            semester:
-              req.body.semester,
-
-            profileImage:
-              req.body.profileImage
-
-          },
-
-          {
-
-            new: true
-
-          }
-
-        );
-
+await Student.findByIdAndUpdate(
+  req.body.studentId,
+  {
+    name: req.body.name,
+    phone: req.body.phone,
+    department: req.body.department,
+    course: req.body.course,
+    semester: req.body.semester,
+    profileImage: req.body.profileImage
+  },
+  {
+    new: true
+  }
+);
       res.json({
 
         user:
