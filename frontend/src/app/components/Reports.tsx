@@ -391,7 +391,42 @@ const subjects = Array.from(
       Absent: absent,
     };
   });
+
+  const getAIRisk = (attendance: number) => {
+
+  if (attendance < 50) {
+    return {
+      label: "🔴 High Risk",
+      color: "bg-red-100 text-red-700"
+    };
+  }
+
+  if (attendance < 75) {
+    return {
+      label: "🟡 Medium Risk",
+      color: "bg-yellow-100 text-yellow-700"
+    };
+  }
+
+  return {
+    label: "🟢 Safe",
+    color: "bg-green-100 text-green-700"
+  };
+};
   
+const getAIRecommendation = (attendance: number) => {
+
+  if (attendance < 50) {
+    return "Immediate attention required";
+  }
+
+  if (attendance < 75) {
+    return "Needs attendance improvement";
+  }
+
+  return "Attendance is healthy";
+};
+
   // Student performance data
   const studentPerformanceData = filteredStudents
   .map((student) => {
@@ -637,6 +672,12 @@ const subjects = Array.from(
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Progress
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  AI Risk
+</th>
+<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  AI Recommendation
+</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -678,6 +719,22 @@ const subjects = Array.from(
                       />
                     </div>
                   </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap">
+
+  <span
+    className={`px-3 py-1 rounded-full text-xs font-medium ${
+      getAIRisk(student.attendance).color
+    }`}
+  >
+    {getAIRisk(student.attendance).label}
+  </span>
+
+</td>
+
+<td className="px-6 py-4 text-sm text-gray-700">
+  {getAIRecommendation(student.attendance)}
+</td>
                 </tr>
               ))}
             </tbody>
