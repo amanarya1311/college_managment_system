@@ -109,63 +109,61 @@ router.get(
 // CREATE student
 
 router.post(
-
   "/",
-
   authMiddleware,
-
-  roleMiddleware(
-    "admin",
-    "faculty"
-  ),
+  roleMiddleware("admin", "faculty"),
 
   async (req, res) => {
 
     try {
 
+      console.log("REQ BODY:", req.body);
+
       const {
-
         name,
-
         rollNo,
-
         email,
-
         password,
-
         department,
-
+        course,
         semester
-
       } = req.body;
+
+      if (
+        !name ||
+        !rollNo ||
+        !email ||
+        !password ||
+        !department ||
+        !course ||
+        !semester
+      ) {
+        return res.status(400).json({
+          message: "All fields are required"
+        });
+      }
 
       const existingStudent =
         await Student.findOne({
-
-          rollNo
-
+          $or: [
+            { rollNo },
+            { email }
+          ]
         });
 
       if (existingStudent) {
 
         return res.status(400).json({
-
           message:
-            "Student already exists"
-
+            "Student already exists with this Roll Number or Email"
         });
 
       }
 
-      // HASH PASSWORD
-
       const hashedPassword =
         await bcrypt.hash(
-
           password,
-
           10
-
         );
 
       const student =
@@ -182,6 +180,8 @@ router.post(
 
           department,
 
+          course,
+
           semester
 
         });
@@ -195,17 +195,19 @@ router.post(
 
     } catch (error) {
 
-      res.status(500).json({
+      console.error(
+        "CREATE STUDENT ERROR:",
+        error
+      );
 
+      res.status(500).json({
         message:
           error.message
-
       });
 
     }
 
   }
-
 );
 
 
