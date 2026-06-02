@@ -35,6 +35,8 @@ const [formData, setFormData] =
 
     department: "",
 
+    course: "",
+
     semester: "",
 
 });
@@ -282,6 +284,9 @@ src={
         semester:
           student?.semester?.toString() || "",
 
+        course:
+          student?.course || "",
+
       });
 
     }}
@@ -309,6 +314,18 @@ src={
                 <span className="text-gray-700">{student.department}</span>
               </div>
               
+              <div className="flex items-center gap-3 text-sm">
+
+  <GraduationCap className="w-4 h-4 text-blue-500" />
+
+  <span className="text-gray-700">
+
+    Course: {student.course || "-"}
+
+  </span>
+
+</div>
+
               <div className="flex items-center gap-3 text-sm">
                 <Hash className="w-4 h-4 text-gray-400" />
                 <span className="text-gray-700">Semester {student.semester}</span>
