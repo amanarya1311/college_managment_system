@@ -41,6 +41,9 @@ export function Attendance() {
   const [selectedSemester, setSelectedSemester] =
     useState("all");
 
+    const [selectedCourse, setSelectedCourse] =
+  useState("all");
+
   const [date, setDate] =
     useState(
       new Date()
@@ -160,6 +163,18 @@ useEffect(() => {
 
   }
 
+  if (
+    selectedCourse !== "all"
+  ) {
+
+    filtered = filtered.filter(
+      (s) =>
+        s.course ===
+        selectedCourse
+    );
+
+  }
+
   // Faculty restriction
 
   if (
@@ -180,15 +195,11 @@ useEffect(() => {
   );
 
 }, [
-
   students,
-
   selectedDepartment,
-
   selectedSemester,
-
+  selectedCourse,
   user
-
 ]);
 
   const departments =
@@ -208,6 +219,15 @@ useEffect(() => {
         )
       )
     ).sort();
+
+    const courses =
+  Array.from(
+    new Set(
+      students
+        .map((s) => s.course)
+        .filter(Boolean)
+    )
+  );
 
   const handleStatusChange = (
     studentId: string,
@@ -387,7 +407,7 @@ await api.post(
 
     <Card className="p-6 mb-6">
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
 
         <div>
 
@@ -430,6 +450,48 @@ await api.post(
           </Select>
 
         </div>
+
+        <div>
+
+  <Label>
+    Course
+  </Label>
+
+  <Select
+    value={selectedCourse}
+    onValueChange={setSelectedCourse}
+  >
+
+    <SelectTrigger>
+      <SelectValue />
+    </SelectTrigger>
+
+    <SelectContent>
+
+      <SelectItem value="all">
+        All Courses
+      </SelectItem>
+
+      {courses.map(
+        (course) => (
+
+          <SelectItem
+            key={course}
+            value={course}
+          >
+
+            {course}
+
+          </SelectItem>
+
+        )
+      )}
+
+    </SelectContent>
+
+  </Select>
+
+</div>
 
         <div>
 
