@@ -487,10 +487,45 @@ await api.post(
         </Select>
       </div>
 
-      <div>
-        <Label htmlFor="designation">Designation</Label>
-        <div>
+<div>
+  <Label htmlFor="designation">Designation</Label>
+
+  <Select
+    value={formData.designation}
+    onValueChange={(value) =>
+      setFormData({
+        ...formData,
+        designation: value,
+      })
+    }
+  >
+    <SelectTrigger>
+      <SelectValue placeholder="Select designation" />
+    </SelectTrigger>
+
+    <SelectContent>
+      <SelectItem value="Professor">
+        Professor
+      </SelectItem>
+
+      <SelectItem value="Associate Professor">
+        Associate Professor
+      </SelectItem>
+
+      <SelectItem value="Assistant Professor">
+        Assistant Professor
+      </SelectItem>
+
+      <SelectItem value="Lecturer">
+        Lecturer
+      </SelectItem>
+    </SelectContent>
+  </Select>
+</div>
+
+<div>
   <Label htmlFor="subject">Subject</Label>
+
   <Input
     id="subject"
     required
@@ -504,21 +539,6 @@ await api.post(
     placeholder="Enter Subject"
   />
 </div>
-        <Select
-          value={formData.designation}
-          onValueChange={(value) => setFormData({ ...formData, designation: value })}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select designation" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Professor">Professor</SelectItem>
-            <SelectItem value="Associate Professor">Associate Professor</SelectItem>
-            <SelectItem value="Assistant Professor">Assistant Professor</SelectItem>
-            <SelectItem value="Lecturer">Lecturer</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
 
       <div>
         <Label htmlFor="dateOfJoining">Date of Joining</Label>
